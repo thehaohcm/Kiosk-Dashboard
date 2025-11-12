@@ -1,0 +1,122 @@
+/* Base styles */
+body {
+  background-color: #0f172a;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #081126, #0f172a);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  height: 56px;
+}
+.brand { font-weight: 700; color: #ffd700; font-size: 1.1rem; }
+.datetime { font-size: 0.95rem; color: #cbd5e1; }
+
+/* Container */
+.container {
+  padding: 80px 2rem 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* News list */
+ul.news-list {
+  list-style: none;
+  padding: 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+ul.news-list li {
+  background: #0b1220;
+  border-radius: 8px;
+  margin: 12px 0;
+  padding: 12px 16px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+ul.news-list li a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+ul.news-list li a:hover { color: #0ea5e9; }
+.time { font-size: 0.85rem; color: #94a3b8; margin-top:6px; }
+
+/* Skeleton loader */
+.skeleton-list {
+  max-width: 900px;
+  margin: 40px auto;
+}
+.skeleton-item {
+  background: #0b1220;
+  border-radius: 8px;
+  margin: 12px 0;
+  padding: 16px;
+}
+.skeleton-title, .skeleton-line {
+  background: #1e293b;
+  border-radius: 4px;
+}
+.skeleton-title {
+  width: 80%;
+  height: 20px;
+  margin-bottom: 10px;
+}
+.skeleton-line {
+  width: 60%;
+  height: 14px;
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #1e293b 0%,
+    #334155 50%,
+    #1e293b 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Slide transition */
+.slide-page {
+  transform: translateX(0);
+  transition: transform 0.7s ease;
+}
+.slide-page.slide-out {
+  transform: translateX(-100%);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 80px 12px; }
+  .datetime { font-size: 0.85rem; }
+}
+
+/* Giữ nền liền mạch khi chuyển trang */
+html, body {
+  background-color: #0f172a; /* cùng màu dashboard */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Khi body chưa sẵn sàng, tránh nhấp nháy */
+body {
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  min-height: 100vh;
+}
