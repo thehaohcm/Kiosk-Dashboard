@@ -120,3 +120,101 @@ body {
   transition: transform 0.7s ease, opacity 0.7s ease;
   min-height: 100vh;
 }
+
+/* ==== Responsive fix for kiosk (vertical screens) ==== */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0f172a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Tự động scale font & phần tử theo tỷ lệ khung hình */
+@media (orientation: portrait) {
+  html {
+    font-size: 18px;
+  }
+  .weather-container,
+  .crypto-container {
+    width: 90vw;
+    max-width: 800px;
+  }
+  iframe, .tradingview-widget-container {
+    width: 90vw !important;
+    height: 65vh !important;
+  }
+  .forecast-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}
+
+@media (orientation: landscape) {
+  html {
+    font-size: 16px;
+  }
+  iframe, .tradingview-widget-container {
+    width: 80vw !important;
+    height: 70vh !important;
+  }
+  .forecast-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Weather box responsive */
+.weather-container {
+  background: #1e293b;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Forecast cards */
+.forecast-card {
+  background: #1e293b;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.forecast-grid {
+  display: grid;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Crypto page layout */
+.crypto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.crypto-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -5,103 +5,117 @@
   <title>Thời tiết Sài Gòn</title>
   <link rel="stylesheet" href="/static/style.css">
   <style>
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header.topbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background-color: #1e293b;
+      font-weight: bold;
+      color: #facc15;
+      font-size: 1.1rem;
+      box-sizing: border-box;
+    }
+
     .weather-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 80px 2rem 2rem;
-      color: #fff;
-    }
-    .current-weather {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 80%;
-      background: #1e293b;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
       padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.3);
-      margin-bottom: 2rem;
+      box-sizing: border-box;
+      text-align: center;
     }
+
+    .current-weather {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+      margin-bottom: 1.5rem;
+    }
+
     .temp {
       font-size: 5rem;
-      font-weight: 600;
-      text-align: center;
+      font-weight: 700;
+      margin: 0.3rem 0;
     }
+
     .details {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      text-align: center;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
     }
+
     .details div {
       background: #0f172a;
       border-radius: 8px;
-      padding: 10px;
-    }
-    /* Khối chứa toàn bộ phần dự báo 7 ngày */
-    .forecast {
-        display: flex;
-        flex-wrap: wrap;           /* Cho phép xuống dòng khi thiếu chỗ */
-        justify-content: center;   /* Căn giữa các thẻ */
-        gap: 1rem;
-        padding: 1rem 2rem;
-        width: 80%;                /* Bằng phần current-weather */
-        max-width: 1200px;
-        margin: 0 auto;
-        box-sizing: border-box;
+      padding: 0.6rem;
+      font-size: 0.9rem;
+      line-height: 1.3;
     }
 
-    /* Mỗi card dự báo */
+    h3 {
+      margin: 1rem 0 0.6rem;
+      font-size: 1.3rem;
+      color: #facc15;
+    }
+
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 1rem;
+      width: 90%;
+      max-width: 800px;
+      justify-content: center;
+    }
+
     .forecast-card {
-        background: #1e293b;
-        border-radius: 12px;
-        padding: 1rem;
-        flex: 1 1 120px;             /* linh động theo chiều ngang */
-        min-width: 120px;            /* không nhỏ quá */
-        text-align: center;
-        color: #fff;
-        transition: transform 0.2s ease;
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 0.8rem;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
     }
 
     .forecast-card:hover {
-        transform: scale(1.05);
+      transform: scale(1.05);
     }
 
-    /* Responsive cho màn nhỏ hơn (mobile) */
-    @media (max-width: 768px) {
-        .forecast {
-            width: 95%;
-            padding: 0.5rem;
-        }
-        .day {
-            flex: 1 1 100px;
-            min-width: 100px;
-        }
+    .forecast-card img {
+      width: 60px;
+      height: 60px;
     }
 
-    .day {
-        background: #1e293b;
-        border-radius: 10px;
-        padding: 10px;
-        flex: 1 1 140px;           /* Co giãn tự động */
-        max-width: 160px;
-        min-width: 120px;
-        text-align: center;
-        transition: transform 0.2s ease;
-    }
-
-    .day:hover {
-        transform: scale(1.05);
-    }
-
-    .day img {
-        width: 60px;
-        height: 60px;
+    @media (orientation: landscape) {
+      .temp { font-size: 4rem; }
+      .forecast-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
   </style>
 </head>
+
 <body class="slide-page">
   <header class="topbar">
     <div class="brand">🌤 Thời tiết Sài Gòn</div>
@@ -109,51 +123,37 @@
   </header>
 
   <div class="weather-container">
-    {% set current = data["current"] %}
-    {% set fc = data["forecast"] %}
-    {% set air = data["air"] %}
-
     <div class="current-weather">
-      <div>
-        <h2>{{ current["name"] }}</h2>
-        <p>{{ current["weather"][0]["description"] | capitalize }}</p>
-        <div class="temp">{{ current["main"]["temp"]|round }}°C</div>
-        <p>Cảm giác như: {{ current["main"]["feels_like"]|round }}°</p>
-      </div>
+      <h2>{{ data["name"] }}</h2>
+      <p>{{ data["weather"][0]["description"] | capitalize }}</p>
+      <h1 class="temp">{{ data["main"]["temp"] }}°C</h1>
+      <p>Cảm giác như: {{ data["main"]["feels_like"] }}°</p>
+
       <div class="details">
-        <div>🌅 Bình minh<br>{{ current["sys"]["sunrise"] | datetimeformat }}</div>
-        <div>🌇 Hoàng hôn<br>{{ current["sys"]["sunset"] | datetimeformat }}</div>
-        <div>💨 Gió<br>{{ current["wind"]["speed"] }} m/s</div>
-        <div>💧 Độ ẩm<br>{{ current["main"]["humidity"] }}%</div>
-        <div>🌡️ Áp suất<br>{{ current["main"]["pressure"] }} hPa</div>
-        <div>🌫️ Tầm nhìn<br>{{ (current["visibility"]/1000)|round(1) }} km</div>
+        <div>🌅 Bình minh<br>{{ data["sys"]["sunrise"] | datetimeformat }}</div>
+        <div>🌇 Hoàng hôn<br>{{ data["sys"]["sunset"] | datetimeformat }}</div>
+        <div>💨 Gió<br>{{ data["wind"]["speed"] }} m/s</div>
+        <div>💧 Độ ẩm<br>{{ data["main"]["humidity"] }}%</div>
+        <div>🌡 Áp suất<br>{{ data["main"]["pressure"] }} hPa</div>
+        <div>👁‍🗨 Tầm nhìn<br>{{ data["visibility"]/1000 }} km</div>
       </div>
     </div>
 
     <h3>Dự báo 7 ngày tới</h3>
-    <div class="forecast">
-    {% set days = {} %}
-    {% for item in fc["list"] %}
-        {% set date = item.dt_txt.split(" ")[0] %}
-        {% if date not in days %}
-        {% set _ = days.update({date: item}) %}
-        {% endif %}
-    {% endfor %}
-
-    {% for date, item in days.items() %}
-        <div class="day">
-        <p>{{ date[5:] }}</p>
-        <img src="http://openweathermap.org/img/wn/{{ item.weather[0].icon }}@2x.png" alt="">
-        <p>{{ item.weather[0].description }}</p>
-        <p>{{ item.main.temp_max|round }}° / {{ item.main.temp_min|round }}°</p>
-        </div>
-    {% endfor %}
-    </div>
-
+    <div class="forecast-grid">
+      {% for day in fc["daily"][:7] %}
+      <div class="forecast-card">
+        <div>{{ day.dt | datetimeformat("%d-%m") }}</div>
+        <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}@2x.png">
+        <div>{{ day.weather[0].description }}</div>
+        <div>{{ day.temp.max }}° / {{ day.temp.min }}°</div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 
   <script>
+    // 🔁 Auto chuyển trang sau 2 phút
     const pages = ["/weather", "/gold", "/crypto", "/stock", "/news", "/finance"];
     let idx = pages.indexOf(window.location.pathname);
     if (idx === -1) idx = 0;
@@ -162,6 +162,7 @@
       window.location.href = pages[idx];
     }, 120000);
 
+    // 🌙 Hiệu ứng slide khi rời trang
     document.body.classList.add("slide-page");
     document.body.style.transition = "transform 0.7s ease-in-out, opacity 0.7s ease-in-out";
     document.body.style.transform = "translateX(0)";
@@ -171,6 +172,7 @@
       document.body.style.opacity = "0";
     });
 
+    // 🕒 Đồng hồ realtime
     function updateClock() {
       const now = new Date();
       const opts = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false,
@@ -182,79 +184,20 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    /* ======= Preload images (OpenWeather icons + local icons) ======= */
+    /* ======= Preload weather icons ======= */
     (function preloadImages() {
-    const imgs = [
-        // OpenWeather sample icons you might use (replace with icons your template actually uses)
+      const imgs = [
         "http://openweathermap.org/img/wn/01d@2x.png",
         "http://openweathermap.org/img/wn/02d@2x.png",
         "http://openweathermap.org/img/wn/03d@2x.png",
         "http://openweathermap.org/img/wn/04d@2x.png",
         "http://openweathermap.org/img/wn/09d@2x.png",
         "http://openweathermap.org/img/wn/10d@2x.png",
-        // local icons (example)
         "/static/img/weather/clear.png",
         "/static/img/weather/cloud.png",
         "/static/img/weather/rain.png"
-    ];
-    imgs.forEach(url => {
-        const i = new Image();
-        i.src = url;
-    });
-    })();
-
-    /* ======= Preload TradingView script and warm it up offscreen ======= */
-    (function warmupTradingView() {
-        // nếu already loaded thì thôi
-        if (window.TradingView) return;
-
-        // 1) tải script vào bộ nhớ (no blocking)
-        const s = document.createElement('script');
-        s.src = "https://s3.tradingview.com/tv.js";
-        s.async = true;
-        s.onload = () => {
-            try {
-            // 2) tạo offscreen container để init 1 widget "nhẹ" (đặt symbol rỗng)
-            const off = document.createElement('div');
-            off.style.position = 'fixed';
-            off.style.left = '-9999px';
-            off.style.width = '1px';
-            off.style.height = '1px';
-            off.id = 'tv-warmup';
-            document.body.appendChild(off);
-
-            // create a minimal widget to warm caches (no toolbar)
-            new TradingView.widget({
-                "container_id": "tv-warmup",
-                "width": 1,
-                "height": 1,
-                "symbol": "BINANCE:BTCUSDT",
-                "interval": "60",
-                "theme": "dark",
-                "locale": "en",
-                "hide_side_toolbar": true,
-                "allow_symbol_change": false,
-                "enable_publishing": false
-            });
-
-            // remove warmup after short delay
-            setTimeout(() => {
-                const el = document.getElementById('tv-warmup');
-                if (el) el.remove();
-            }, 2500);
-            } catch (e) {
-            // silent
-            console.debug("TV warmup failed", e);
-            }
-        };
-        s.onerror = () => console.warn("Cannot preload TradingView script");
-        document.head.appendChild(s);
-
-        // Also prefetch the TradingView css/resources by creating a link rel=prefetch
-        const p = document.createElement('link');
-        p.rel = 'prefetch';
-        p.href = 'https://s3.tradingview.com/tv.js';
-        document.head.appendChild(p);
+      ];
+      imgs.forEach(url => { const i = new Image(); i.src = url; });
     })();
   </script>
 </body>
