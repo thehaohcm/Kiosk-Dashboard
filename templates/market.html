@@ -280,6 +280,14 @@
   </div>
 
   <script>
+    const pages = ["/weather", "/news", "/market", "/finance"];
+    let idx = pages.indexOf(window.location.pathname);
+    if (idx === -1) idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % pages.length;
+      window.location.href = pages[idx];
+    }, 120000);
+    
     function updateClock() {
       const now = new Date();
       const opts = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false,
