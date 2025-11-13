@@ -102,60 +102,6 @@
     i.src = url;
   });
 })();
-
-    /* ======= Preload TradingView script and warm it up offscreen ======= */
-    (function warmupTradingView() {
-        // nếu already loaded thì thôi
-        if (window.TradingView) return;
-
-        // 1) tải script vào bộ nhớ (no blocking)
-        const s = document.createElement('script');
-        s.src = "https://s3.tradingview.com/tv.js";
-        s.async = true;
-        s.onload = () => {
-            try {
-            // 2) tạo offscreen container để init 1 widget "nhẹ" (đặt symbol rỗng)
-            const off = document.createElement('div');
-            off.style.position = 'fixed';
-            off.style.left = '-9999px';
-            off.style.width = '1px';
-            off.style.height = '1px';
-            off.id = 'tv-warmup';
-            document.body.appendChild(off);
-
-            // create a minimal widget to warm caches (no toolbar)
-            new TradingView.widget({
-                "container_id": "tv-warmup",
-                "width": 1,
-                "height": 1,
-                "symbol": "BINANCE:BTCUSDT",
-                "interval": "60",
-                "theme": "dark",
-                "locale": "en",
-                "hide_side_toolbar": true,
-                "allow_symbol_change": false,
-                "enable_publishing": false
-            });
-
-            // remove warmup after short delay
-            setTimeout(() => {
-                const el = document.getElementById('tv-warmup');
-                if (el) el.remove();
-            }, 2500);
-            } catch (e) {
-            // silent
-            console.debug("TV warmup failed", e);
-            }
-        };
-        s.onerror = () => console.warn("Cannot preload TradingView script");
-        document.head.appendChild(s);
-
-        // Also prefetch the TradingView css/resources by creating a link rel=prefetch
-        const p = document.createElement('link');
-        p.rel = 'prefetch';
-        p.href = 'https://s3.tradingview.com/tv.js';
-        document.head.appendChild(p);
-    })();
   </script>
 </body>
 </html>
