@@ -1,212 +1,82 @@
-/* Base styles */
-body {
-  background-color: #0f172a;
-  color: #ffffff;
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  overflow-x: hidden;
+/* Base */
+:root{--bg:#0f172a;--card:#111827;--accent:#facc15;--muted:#94a3b8;--panel:#1e293b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;font-family:Inter, Arial, sans-serif;overflow:hidden}
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:linear-gradient(90deg,#081126,#0f172a);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid rgba(255,255,255,0.03);z-index:50}
+.brand{color:var(--accent);font-weight:700}
+.datetime{color:var(--muted);font-size:0.95rem}
+
+/* main center for portrait kiosk */
+.main-center{position:absolute;top:56px;bottom:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;overflow:auto}
+
+/* cards */
+.card{background:var(--panel);border-radius:12px;padding:16px;width:92%;max-width:720px;box-shadow:0 8px 24px rgba(2,6,23,0.6);margin:10px 0}
+.main-card{padding:28px 20px;text-align:center}
+.city{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.desc{opacity:.85;margin-bottom:8px}
+.temp{font-size:3.8rem;font-weight:700;margin:6px 0}
+.feels{opacity:.8}
+
+/* info grid 3x2 */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:92%;max-width:720px;margin-top:6px}
+.info-card{background:var(--card);border-radius:10px;padding:10px;text-align:center}
+.info-card div{opacity:.85}
+.info-card strong{display:block;margin-top:6px;font-weight:700}
+
+/* forecast grid 3x2 */
+.forecast-card-wrap{padding:12px}
+.forecast-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.forecast-card.small{background:var(--card);border-radius:10px;padding:10px;text-align:center;border:1px solid rgba(255,255,255,0.04)}
+.forecast-card img{width:48px;height:48px;margin:6px auto}
+.fc-date{font-weight:700;margin-bottom:4px}
+.fc-desc{opacity:.85;font-size:0.9rem;margin-bottom:6px}
+.fc-temp{font-weight:700}
+
+/* market page specifics */
+.grid-2x2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:92%;max-width:980px;margin:6px 0}
+.small{padding:12px}
+.mini-table{width:100%;border-collapse:collapse}
+.mini-table td{padding:6px 4px;font-size:0.95rem}
+.left{text-align:left}
+
+/* stock list table */
+.full-table{width:100%;border-collapse:collapse}
+.full-table th, .full-table td{padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.full-table th.left{text-align:left}
+
+/* VNINDEX box */
+.vnindex-box{width:92%;max-width:720px;margin:12px 0;text-align:center;padding:12px;border-radius:10px;background:var(--panel)}
+
+/* news list */
+ul.news-list{list-style:none;padding:0;margin:0;width:92%;max-width:720px}
+ul.news-list li{background:#071125;border-radius:8px;padding:12px;margin:8px 0;text-align:left}
+ul.news-list li a{color:#38bdf8;text-decoration:none;font-weight:600}
+.time{color:var(--muted);margin-top:6px;font-size:0.85rem}
+
+/* skeleton */
+.skeleton-list{width:92%;max-width:720px;margin:10px 0}
+.skeleton-item{background:#061022;border-radius:8px;padding:10px;margin:8px 0}
+.skeleton-title{height:16px;background:#0d1b2a;border-radius:4px;width:60%}
+.skeleton-line{height:12px;background:#0d1b2a;border-radius:4px;width:40%}
+.shimmer{background:linear-gradient(90deg,#0d1b2a 0%,#133249 50%,#0d1b2a 100%);background-size:200% 100%;animation:shimmer 1.2s infinite}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+/* up / down colors */
+.up{color:#10b981;font-weight:700}
+.down{color:#f43f5e;font-weight:700}
+
+/* portrait tweaks for kiosk */
+@media (orientation:portrait) {
+  .temp{font-size:4.2rem}
+  .main-card{max-width:720px}
+  .info-grid{width:92%}
 }
 
-/* Top bar */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 18px;
-  background: linear-gradient(90deg, #081126, #0f172a);
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 999;
-  height: 56px;
-}
-.brand { font-weight: 700; color: #ffd700; font-size: 1.1rem; }
-.datetime { font-size: 0.95rem; color: #cbd5e1; }
-
-/* Container */
-.container {
-  padding: 80px 2rem 2rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* News list */
-ul.news-list {
-  list-style: none;
-  padding: 0;
-  max-width: 900px;
-  margin: 0 auto;
-}
-ul.news-list li {
-  background: #0b1220;
-  border-radius: 8px;
-  margin: 12px 0;
-  padding: 12px 16px;
-  text-align: left;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-ul.news-list li a {
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: 600;
-}
-ul.news-list li a:hover { color: #0ea5e9; }
-.time { font-size: 0.85rem; color: #94a3b8; margin-top:6px; }
-
-/* Skeleton loader */
-.skeleton-list {
-  max-width: 900px;
-  margin: 40px auto;
-}
-.skeleton-item {
-  background: #0b1220;
-  border-radius: 8px;
-  margin: 12px 0;
-  padding: 16px;
-}
-.skeleton-title, .skeleton-line {
-  background: #1e293b;
-  border-radius: 4px;
-}
-.skeleton-title {
-  width: 80%;
-  height: 20px;
-  margin-bottom: 10px;
-}
-.skeleton-line {
-  width: 60%;
-  height: 14px;
-}
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    #1e293b 0%,
-    #334155 50%,
-    #1e293b 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite;
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Slide transition */
-.slide-page {
-  transform: translateX(0);
-  transition: transform 0.7s ease;
-}
-.slide-page.slide-out {
-  transform: translateX(-100%);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .container { padding: 80px 12px; }
-  .datetime { font-size: 0.85rem; }
-}
-
-/* Giữ nền liền mạch khi chuyển trang */
-html, body {
-  background-color: #0f172a; /* cùng màu dashboard */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Khi body chưa sẵn sàng, tránh nhấp nháy */
-body {
-  transition: transform 0.7s ease, opacity 0.7s ease;
-  min-height: 100vh;
-}
-
-/* ==== Responsive fix for kiosk (vertical screens) ==== */
-
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #0f172a;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-/* Tự động scale font & phần tử theo tỷ lệ khung hình */
-@media (orientation: portrait) {
-  html {
-    font-size: 18px;
-  }
-  .weather-container,
-  .crypto-container {
-    width: 90vw;
-    max-width: 800px;
-  }
-  .forecast-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-}
-
-@media (orientation: landscape) {
-  html {
-    font-size: 16px;
-  }
-  .forecast-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Weather box responsive */
-.weather-container {
-  background: #1e293b;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Forecast cards */
+/* Fix forecast card layout name */
 .forecast-card {
-  background: #1e293b;
-  padding: 1rem;
-  border-radius: 0.6rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.forecast-grid {
-  display: grid;
-  gap: 0.6rem;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-/* Crypto page layout */
-.crypto-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.crypto-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+    background: var(--card);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.04);
 }

@@ -1,116 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8">
-  <title>Kiosk Dashboard</title>
-  <link rel="stylesheet" href="/static/style.css">
+<head><meta charset="utf-8"><title>Kiosk Dashboard</title><link rel="stylesheet" href="/static/style.css"></head>
+<body class="portrait">
+  <header class="topbar"><div class="brand">Kiosk Dashboard</div><div class="datetime" id="clock">--:--:--</div></header>
+  <main class="main-center">
+    <div class="card"><h3>Khởi động...</h3><p>Đang chuyển đến trang weather</p></div>
+  </main>
 
-  <!-- Prefetch / Preload các file tĩnh quan trọng -->
-  <link rel="preload" href="/static/style.css" as="style">
-  <link rel="preconnect" href="https://openweathermap.org" crossorigin>
-
-  <!-- Nếu bạn có các icon local (ví dụ weather icons custom), preload chúng -->
-  <link rel="preload" href="/static/img/weather/clear.png" as="image">
-  <link rel="preload" href="/static/img/weather/cloud.png" as="image">
-  <!-- prefetch cho những assets không cần ngay nhưng hữu ích -->
-  <link rel="prefetch" href="/news" as="document">
-  <link rel="prefetch" href="/market" as="document">
-  <link rel="prefetch" href="/finance" as="document">
-</head>
-<body>
-  <div id="app" class="slide-page">
-    <header class="topbar">
-      <div class="brand">Kiosk Dashboard</div>
-      <div class="datetime" id="clock">--:--:--</div>
-    </header>
-
-    <main id="content">
-      <h2 style="margin-top:4rem;">Đang tải dữ liệu...</h2>
-    </main>
-  </div>
-
-  <script>
-    // Danh sách trang
-    const pages = ["/weather", "/news", "/market", "/finance"];
-    let idx = 0;
-    const pageDuration = 180000; // 3 phút
-
-    // 🕒 Đồng hồ realtime
-    function updateClock() {
-      const now = new Date();
-      const opts = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false,
-                    year: 'numeric', month: '2-digit', day: '2-digit',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      document.getElementById('clock').textContent =
-        new Intl.DateTimeFormat('vi-VN', opts).format(now);
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    // 🌙 Hiệu ứng slide khi chuyển trang
-    function goToPage(path) {
-      const app = document.getElementById('app');
-      app.classList.add('slide-out');
-      setTimeout(() => { window.location.href = path; }, 700);
-    }
-
-    // 🚀 Tự động mở trang đầu tiên sau 1 giây
-    setTimeout(() => {
-      goToPage(pages[0]); // /weather
-    }, 1000);
-
-    // 🔁 Auto chuyển trang luân phiên (2 phút)
-    setInterval(() => {
-      idx = (idx + 1) % pages.length;
-      goToPage(pages[idx]);
-    }, pageDuration);
-
-    /* ======= Preload images (OpenWeather icons + local icons) ======= */
-    (function preloadImages() {
-      const imgs = [
-        // OpenWeather sample icons you might use (replace with icons your template actually uses)
-        "http://openweathermap.org/img/wn/01d@2x.png",
-        "http://openweathermap.org/img/wn/02d@2x.png",
-        "http://openweathermap.org/img/wn/03d@2x.png",
-        "http://openweathermap.org/img/wn/04d@2x.png",
-        "http://openweathermap.org/img/wn/09d@2x.png",
-        "http://openweathermap.org/img/wn/10d@2x.png",
-        // local icons (example)
-        "/static/img/weather/clear.png",
-        "/static/img/weather/cloud.png",
-        "/static/img/weather/rain.png"
-      ];
-      imgs.forEach(url => {
-        const i = new Image();
-        i.src = url;
-      });
-    })();
-
-    async function prefetchJson() {
-      try {
-        // Chờ 3 giây để mọi thứ ổn định rồi mới tải sẵn dữ liệu
-        await new Promise(r => setTimeout(r, 3000));
-
-        console.log("🚀 Prefetching dashboard data in background...");
-
-        const endpoints = ["/weather", "/news", "/market", "/finance"];
-
-        // Gọi từng endpoint cách nhau 1 giây (nhẹ cho Raspberry Pi)
-        endpoints.forEach((url, i) => {
-          setTimeout(() => {
-            fetch(url, { cache: "no-store" })
-              .then(r => console.log("Prefetched:", url, r.status))
-              .catch(err => console.warn("Prefetch failed:", url, err));
-          }, i * 1000);
-        });
-
-      } catch (e) {
-        console.warn("PrefetchJson error:", e);
-      }
-    }
-
-    // Gọi sau khi tất cả page chính load xong
-    window.addEventListener("load", prefetchJson);
-  </script>
-</body>
-</html>
+<script>
+function updateClock(){const now=new Date();const opts={timeZone:'Asia/Ho_Chi_Minh',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'};document.getElementById('clock').textContent=new Intl.DateTimeFormat('vi-VN',opts).format(now);}updateClock();setInterval(updateClock,1000);
+const pages=['/weather','/news','/market','/finance']; setTimeout(()=>{window.location.href=pages[0];},1000);
+</script>
+</body></html>

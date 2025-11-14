@@ -4,262 +4,74 @@
   <meta charset="utf-8">
   <title>Thời tiết Sài Gòn</title>
   <link rel="stylesheet" href="/static/style.css">
-
-  <style>
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      /* height: 100vh;
-      overflow: hidden; */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-
-    }
-
-    header.topbar {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.6rem 1rem;
-      background-color: #1e293b;
-      font-weight: 600;
-      color: #facc15;
-      font-size: 1.1rem;
-    }
-
-    /* === CONTAINER TO CENTER THE WHOLE CONTENT === */
-    .page-wrapper {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .weather-container {
-      width: 90%;
-      max-width: 950px;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-top: -2rem;
-    }
-
-    /* MAIN TEMP CARD */
-    .main-card {
-      background: #1e293b;
-      padding: 2rem 1.5rem;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 0 12px rgba(0,0,0,0.3);
-    }
-
-    .city {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: .3rem;
-    }
-
-    .desc {
-      opacity: .85;
-      font-size: 1.2rem;
-      margin-bottom: .8rem;
-    }
-
-    .temp {
-      font-size: 5rem;
-      font-weight: 700;
-      margin: .2rem 0 .4rem 0;
-    }
-
-    .feels {
-      opacity: .8;
-      font-size: 1rem;
-    }
-
-    /* GRID 3x2 */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1rem;
-    }
-
-    .info-card {
-      background: #1e293b;
-      border-radius: 14px;
-      padding: .8rem;
-      text-align: center;
-    }
-
-    .info-card span { font-size: .9rem; opacity: .75; }
-    .info-card strong { font-size: 1.1rem; }
-
-    /* Forecast 6-day layout */
-    .forecast-section {
-      width: 100%;
-      text-align: center;
-    }
-
-    .forecast-section h3 {
-      color: #facc15;
-      margin-bottom: 1rem;
-      font-size: 1.35rem;
-    }
-
-    .forecast-row {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .forecast-card {
-      width: 150px;
-      background: #1e293b;
-      border-radius: 14px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.05); /* 👈 viền mỏng giống mẫu */
-    }
-
-    .forecast-card img {
-      width: 55px;
-      height: 55px;
-      margin: .5rem 0;
-    }
-
-    .forecast-card .date {
-      font-size: .95rem;
-      font-weight: 600;
-      margin-bottom: .4rem;
-    }
-
-    .forecast-card .desc {
-      opacity: .85;
-      margin-bottom: .4rem;
-      font-size: .85rem;
-    }
-
-    .forecast-card .temp-range {
-      font-weight: 600;
-      font-size: .9rem;
-    }
-
-
-  </style>
-
 </head>
-
-<body class="slide-page">
+<body class="portrait">
   <header class="topbar">
-    <div>🌤 Thời tiết Sài Gòn</div>
-    <div id="clock">--:--:--</div>
+    <div class="brand">🌤 Thời tiết Sài Gòn</div>
+    <div class="datetime" id="clock">--:--:--</div>
   </header>
 
-  <div class="page-wrapper">
-    <div class="weather-container">
+  <main class="main-center">
 
-      <!-- MAIN CARD -->
-      <div class="main-card">
-        <div class="city">{{ data["city"] }}</div>
-        <div class="desc">{{ data["current"]["weather"][0]["description"] | capitalize }}</div>
-        <div class="temp">{{ data["current"]["main"]["temp"] }}°C</div>
-        <div class="feels">Cảm giác như: {{ data["current"]["main"]["feels_like"] }}°</div>
+    <!-- CURRENT WEATHER -->
+    <section class="card main-card">
+      <div class="city">{{ data.current.name }}</div>
+      <div class="desc">{{ data.current.weather[0].description | capitalize }}</div>
+      <div class="temp">{{ data.current.main.temp }}°C</div>
+      <div class="feels">Cảm giác như: {{ data.current.main.feels_like }}°</div>
+    </section>
+
+    <!-- INFO GRID -->
+    <section class="info-grid">
+      <div class="info-card"><div>💨 Gió</div><strong>{{ data.current.wind.speed }} m/s</strong></div>
+      <div class="info-card"><div>💧 Độ ẩm</div><strong>{{ data.current.main.humidity }}%</strong></div>
+      <div class="info-card"><div>🌡 Áp suất</div><strong>{{ data.current.main.pressure }} hPa</strong></div>
+      <div class="info-card"><div>🌅 Bình minh</div><strong>{{ data.current.sys.sunrise | datetimeformat }}</strong></div>
+      <div class="info-card"><div>🌇 Hoàng hôn</div><strong>{{ data.current.sys.sunset | datetimeformat }}</strong></div>
+      <div class="info-card"><div>👁️ Tầm nhìn</div><strong>{{ (data.current.visibility/1000) }} km</strong></div>
+    </section>
+
+    <!-- FORECAST -->
+    <section class="card forecast-card-wrap">
+      <h3>🗓 Dự báo 6 ngày</h3>
+
+      <div class="forecast-grid">
+        {% for f in data.forecast_daily %}
+        <div class="forecast-card small">
+          <div class="fc-date">{{ f.date }}</div>
+          <img src="https://openweathermap.org/img/wn/{{ f.icon }}@2x.png" />
+          <div class="fc-desc">{{ f.description }}</div>
+          <div class="fc-temp">{{ f.temp_max }}° / {{ f.temp_min }}°</div>
+        </div>
+        {% endfor %}
       </div>
+    </section>
 
-      <!-- INFO GRID -->
-      <div class="info-grid">
-        <div class="info-card">
-          <span>💨 Gió</span>
-          <strong>{{ data["current"]["wind"]["speed"] }} m/s</strong>
-        </div>
+  </main>
 
-        <div class="info-card">
-          <span>💧 Độ ẩm</span>
-          <strong>{{ data["current"]["main"]["humidity"] }}%</strong>
-        </div>
+<script>
+function updateClock(){
+  const now = new Date();
+  const opts = {
+    timeZone: 'Asia/Ho_Chi_Minh',
+    hour12:false,
+    year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit'
+  };
+  document.getElementById('clock').textContent =
+    new Intl.DateTimeFormat('vi-VN', opts).format(now);
+}
+updateClock();
+setInterval(updateClock,1000);
 
-        <div class="info-card">
-          <span>🌡 Áp suất</span>
-          <strong>{{ data["current"]["main"]["pressure"] }} hPa</strong>
-        </div>
-
-        <div class="info-card">
-          <span>🌅 Bình minh</span>
-          <strong>{{ data["current"]["sys"]["sunrise"] | datetimeformat }}</strong>
-        </div>
-
-        <div class="info-card">
-          <span>🌇 Hoàng hôn</span>
-          <strong>{{ data["current"]["sys"]["sunset"] | datetimeformat }}</strong>
-        </div>
-
-        <div class="info-card">
-          <span>👁 Tầm nhìn</span>
-          <strong>{{ data["current"]["visibility"]/1000 }} km</strong>
-        </div>
-      </div>
-
-      <!-- FORECAST -->
-      <div class="forecast-section">
-        <h3>Dự báo 6 ngày tới</h3>
-
-        <div class="forecast-row">
-          {% for f in data["forecast"][:3] %}
-          <div class="forecast-card">
-            <div class="date">{{ f.date.split('-')[2] }}/{{ f.date.split('-')[1] }}</div>
-            <img src="https://openweathermap.org/img/wn/{{ f.icon }}@2x.png">
-            <div class="desc">{{ f.description }}</div>
-            <div class="temp-range">{{ f.temp_max }}° / {{ f.temp_min }}°</div>
-          </div>
-          {% endfor %}
-        </div>
-
-        <div class="forecast-row">
-          {% for f in data["forecast"][3:6] %}
-          <div class="forecast-card">
-            <div class="date">{{ f.date.split('-')[2] }}/{{ f.date.split('-')[1] }}</div>
-            <img src="https://openweathermap.org/img/wn/{{ f.icon }}@2x.png">
-            <div class="desc">{{ f.description }}</div>
-            <div class="temp-range">{{ f.temp_max }}° / {{ f.temp_min }}°</div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    /* Auto rotate pages */
-    const pages = ["/weather", "/news", "/market", "/finance"];
-    let idx = pages.indexOf(window.location.pathname);
-    if (idx < 0) idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % pages.length;
-      window.location.href = pages[idx];
-    }, 180000);
-
-    /* Clock */
-    function updateClock() {
-      const now = new Date();
-      const opts = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false,
-        year:'numeric',month:'2-digit',day:'2-digit',
-        hour:'2-digit',minute:'2-digit',second:'2-digit'
-      };
-      document.getElementById("clock").textContent =
-        new Intl.DateTimeFormat('vi-VN', opts).format(now);
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+// Auto-switch pages
+const pages = ['/weather','/news','/market','/finance'];
+let idx = pages.indexOf(window.location.pathname);
+if(idx===-1) idx = 0;
+setInterval(()=>{
+  idx = (idx+1)%pages.length;
+  window.location.href = pages[idx];
+}, 120000);
+</script>
 </body>
 </html>

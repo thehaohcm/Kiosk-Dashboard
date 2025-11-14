@@ -1,7 +1,6 @@
 {
   "weather_full": {
     "data": {
-      "city": "Thành phố Hồ Chí Minh",
       "current": {
         "coord": {
           "lon": 106.6667,
@@ -12,84 +11,76 @@
             "id": 803,
             "main": "Clouds",
             "description": "mây cụm",
-            "icon": "04d"
+            "icon": "04n"
           }
         ],
         "base": "stations",
         "main": {
-          "temp": 32.26,
-          "feels_like": 39.26,
-          "temp_min": 32.01,
-          "temp_max": 32.26,
-          "pressure": 1010,
-          "humidity": 73,
-          "sea_level": 1010,
-          "grnd_level": 1009
+          "temp": 27.01,
+          "feels_like": 30.05,
+          "temp_min": 27.01,
+          "temp_max": 27.01,
+          "pressure": 1012,
+          "humidity": 83,
+          "sea_level": 1012,
+          "grnd_level": 1011
         },
         "visibility": 10000,
         "wind": {
-          "speed": 2.68,
-          "deg": 335,
-          "gust": 4.47
+          "speed": 1.03,
+          "deg": 0
         },
         "clouds": {
           "all": 75
         },
-        "dt": 1763012227,
+        "dt": 1763133675,
         "sys": {
-          "type": 2,
-          "id": 2093009,
+          "type": 1,
+          "id": 9314,
           "country": "VN",
-          "sunrise": 1762987692,
-          "sunset": 1763029628
+          "sunrise": 1763074114,
+          "sunset": 1763116025
         },
         "timezone": 25200,
         "id": 1566083,
         "name": "Thành phố Hồ Chí Minh",
         "cod": 200
       },
-      "forecast": [
+      "forecast_daily": [
         {
-          "date": "2025-11-13",
-          "icon": "10n",
-          "description": "mưa nhẹ",
-          "temp_max": 31.71,
-          "temp_min": 23.19
-        },
-        {
-          "date": "2025-11-14",
-          "icon": "10n",
-          "description": "mưa nhẹ",
-          "temp_max": 30.41,
-          "temp_min": 21.05
-        },
-        {
-          "date": "2025-11-15",
-          "icon": "04n",
+          "date": "15/11",
+          "temp_min": 24.2,
+          "temp_max": 31.3,
           "description": "mây cụm",
-          "temp_max": 30.78,
-          "temp_min": 22.75
+          "icon": "04n"
         },
         {
-          "date": "2025-11-16",
-          "icon": "10n",
-          "description": "mưa vừa",
-          "temp_max": 27.79,
-          "temp_min": 23.27
-        },
-        {
-          "date": "2025-11-17",
-          "icon": "10n",
-          "description": "mưa nhẹ",
-          "temp_max": 27.67,
-          "temp_min": 23.28
-        },
-        {
-          "date": "2025-11-18",
-          "icon": "04d",
+          "date": "16/11",
+          "temp_min": 22.5,
+          "temp_max": 24.6,
           "description": "mây đen u ám",
-          "temp_max": 28.08,
-          "temp_min": 23.97
+          "icon": "04n"
+        },
+        {
+          "date": "17/11",
+          "temp_min": 22.3,
+          "temp_max": 27.1,
+          "description": "mưa nhẹ",
+          "icon": "10d"
+        },
+        {
+          "date": "18/11",
+          "temp_min": 23.4,
+          "temp_max": 27.1,
+          "description": "mưa nhẹ",
+          "icon": "10n"
+        },
+        {
+          "date": "19/11",
+          "temp_min": 23.4,
+          "temp_max": 26.6,
+          "description": "mưa nhẹ",
+          "icon": "10n"
         }
       ],
       "air": {
@@ -103,361 +94,125 @@
               "aqi": 3
             },
             "components": {
-              "co": 409.89,
-              "no": 0.04,
-              "no2": 6.24,
-              "o3": 70.19,
-              "so2": 3.48,
-              "pm2_5": 25.65,
-              "pm10": 28.14,
-              "nh3": 0.86
+              "co": 458,
+              "no": 0,
+              "no2": 5.12,
+              "o3": 69.4,
+              "so2": 1.86,
+              "pm2_5": 38.95,
+              "pm10": 49.74,
+              "nh3": 2.06
             },
-            "dt": 1763012472
+            "dt": 1763133713
           }
         ]
       }
     },
-    "time": 1763012471.9065018
+    "time": 1763133711.8725178
   },
   "news": {
     "data": [
       {
-        "title": "Tài xế che biển số tránh phạt nguội",
-        "link": "https://vnexpress.net/tai-xe-che-bien-so-tranh-phat-nguoi-4963031.html",
-        "pubDate": "Thu, 13 Nov 2025 11:32:33 +0700"
+        "title": "Ôtô hất văng người nước ngoài xuống đường ở Vũng Tàu",
+        "link": "https://vnexpress.net/oto-hat-vang-nguoi-nuoc-ngoai-xuong-duong-o-vung-tau-4964175.html",
+        "pubDate": "Fri, 14 Nov 2025 22:00:04 +0700"
       },
       {
-        "title": "Chùa gần 2.000 năm ở Trung Quốc bị lửa thiêu rụi phần mái",
-        "link": "https://vnexpress.net/chua-gan-2-000-nam-o-trung-quoc-bi-lua-thieu-rui-phan-mai-4963439.html",
-        "pubDate": "Thu, 13 Nov 2025 11:25:12 +0700"
+        "title": "Syria mở lại đại sứ quán ở London sau hơn một thập kỷ",
+        "link": "https://vnexpress.net/syria-mo-lai-dai-su-quan-o-london-sau-hon-mot-thap-ky-4964185.html",
+        "pubDate": "Fri, 14 Nov 2025 21:59:22 +0700"
       },
       {
-        "title": "Yêu cầu lập đề án xử lý vấn đề ô nhiễm không khí tại Hà Nội, TP HCM",
-        "link": "https://vnexpress.net/yeu-cau-lap-de-an-xu-ly-van-de-o-nhiem-khong-khi-tai-ha-noi-tp-hcm-4963459.html",
-        "pubDate": "Thu, 13 Nov 2025 11:22:45 +0700"
+        "title": "10 ôtô bán nhiều nhất thị trường Việt Nam tháng 10",
+        "link": "https://vnexpress.net/oto-xe-may/v-car/doanh-so/10-oto-ban-nhieu-nhat-thi-truong-viet-nam-thang-10-4964162.html",
+        "pubDate": "Fri, 14 Nov 2025 21:36:43 +0700"
       },
       {
-        "title": "Lý do có thể khiến vận tải cơ Thổ Nhĩ Kỳ vỡ rời trên không",
-        "link": "https://vnexpress.net/ly-do-co-the-khien-van-tai-co-tho-nhi-ky-vo-roi-tren-khong-4963051.html",
-        "pubDate": "Thu, 13 Nov 2025 11:20:27 +0700"
+        "title": "ASEAN Cup 2026 chốt đá sau World Cup",
+        "link": "https://vnexpress.net/asean-cup-2026-chot-da-sau-world-cup-4964189.html",
+        "pubDate": "Fri, 14 Nov 2025 21:17:39 +0700"
       },
       {
-        "title": "TikToker nổi tiếng ra tòa vì làm 'kẻ thứ ba', quyến rũ người quản lý",
-        "link": "https://vnexpress.net/tiktoker-noi-tieng-ra-toa-vi-lam-ke-thu-ba-quyen-ru-nguoi-quan-ly-4963473.html",
-        "pubDate": "Thu, 13 Nov 2025 11:13:28 +0700"
+        "title": "Mất 6 tỷ đồng vì tin lời tổng giám đốc 'tự nhận'",
+        "link": "https://vnexpress.net/mat-6-ty-dong-vi-tin-loi-tong-giam-doc-tu-nhan-4964181.html",
+        "pubDate": "Fri, 14 Nov 2025 21:13:54 +0700"
       },
       {
-        "title": "Lừa 'chạy án' tử hình giá 35 triệu đồng",
-        "link": "https://vnexpress.net/lua-chay-an-tu-hinh-gia-35-trieu-dong-4963255.html",
-        "pubDate": "Thu, 13 Nov 2025 11:10:44 +0700"
+        "title": "Di dời khẩn cấp 664 người sau vụ sạt lở giữa trời nắng ráo",
+        "link": "https://vnexpress.net/di-doi-khan-cap-664-nguoi-sau-vu-sat-lo-giua-troi-nang-rao-4964179.html",
+        "pubDate": "Fri, 14 Nov 2025 21:12:24 +0700"
       },
       {
-        "title": "Đồng tiền đầu tiên nước ta xuất hiện ở triều đại nào?",
-        "link": "https://vnexpress.net/crossword-giai-o-chu-o-chu-dong-tien-dau-tien-nuoc-ta-xuat-hien-o-trieu-dai-nao-4962030.html",
-        "pubDate": "Thu, 13 Nov 2025 11:10:33 +0700"
+        "title": "Nam sinh bán 30 cây vàng của bố mẹ, chuyển tiền cho công an dỏm",
+        "link": "https://vnexpress.net/nam-sinh-ban-30-cay-vang-cua-bo-me-chuyen-tien-cho-cong-an-dom-4964177.html",
+        "pubDate": "Fri, 14 Nov 2025 21:06:06 +0700"
       },
       {
-        "title": "Ôtô suýt rơi xuống sườn núi khi leo lên 'cổng trời'",
-        "link": "https://vnexpress.net/oto-suyt-roi-xuong-suon-nui-khi-leo-len-cong-troi-4963361.html",
-        "pubDate": "Thu, 13 Nov 2025 11:09:58 +0700"
+        "title": "Hương Giang diễn áo tắm cùng thí sinh Miss Universe",
+        "link": "https://vnexpress.net/huong-giang-dien-ao-tam-cung-thi-sinh-miss-universe-4964135.html",
+        "pubDate": "Fri, 14 Nov 2025 21:04:56 +0700"
       },
       {
-        "title": "Sau 10 năm trả nợ gần 8 tỷ đồng, giờ tôi có nên sống hưởng thụ?",
-        "link": "https://vnexpress.net/sau-10-nam-tra-no-gan-8-ty-dong-gio-toi-co-nen-song-huong-thu-4963116.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Sức mua trên Shopee tăng mạnh dịp 11/11 Mega Sale",
+        "link": "https://vnexpress.net/suc-mua-tren-shopee-tang-manh-dip-11-11-mega-sale-4964173.html",
+        "pubDate": "Fri, 14 Nov 2025 21:00:00 +0700"
       },
       {
-        "title": "'Vẽ kể chuyện' - TikToker yêu sử Việt",
-        "link": "https://vnexpress.net/ve-ke-chuyen-tiktoker-yeu-su-viet-4962992.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Mỹ nhân đóng yêu tinh nhện 'Tây du ký' ngày ấy, bây giờ",
+        "link": "https://vnexpress.net/my-nhan-dong-yeu-tinh-nhen-tay-du-ky-ngay-ay-bay-gio-4964035.html",
+        "pubDate": "Fri, 14 Nov 2025 20:35:03 +0700"
       },
       {
-        "title": "Cơn sốt khai thác đất hiếm ở Greenland",
-        "link": "https://vnexpress.net/con-sot-khai-thac-dat-hiem-o-greenland-4962722.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Bali kêu gọi sứ quán các nước 'quản' giúp khách quốc tế",
+        "link": "https://vnexpress.net/bali-keu-goi-su-quan-cac-nuoc-quan-giup-khach-quoc-te-4963956.html",
+        "pubDate": "Fri, 14 Nov 2025 20:31:43 +0700"
       },
       {
-        "title": "Tìm anh đi cùng chặng đường dài trong cuộc sống",
-        "link": "https://vnexpress.net/tim-anh-di-cung-chang-duong-dai-trong-cuoc-song-4959260.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Chí mà phù, lục tàu xá là món gì?",
+        "link": "https://vnexpress.net/chi-ma-phu-luc-tau-xa-la-mon-gi-4963658.html",
+        "pubDate": "Fri, 14 Nov 2025 20:29:15 +0700"
       },
       {
-        "title": "Vì sao nhiều người tin Kim tự tháp do người ngoài hành tinh xây?",
-        "link": "https://vnexpress.net/vi-sao-nhieu-nguoi-tin-kim-tu-thap-do-nguoi-ngoai-hanh-tinh-xay-4963470.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Phi hành đoàn Trung Quốc trở về an toàn sau sự cố",
+        "link": "https://vnexpress.net/phi-hanh-doan-trung-quoc-tro-ve-an-toan-sau-su-co-4964176.html",
+        "pubDate": "Fri, 14 Nov 2025 20:08:41 +0700"
       },
       {
-        "title": "Ngân hàng số Cake tặng iPhone 17 cho khách gửi tiết kiệm",
-        "link": "https://vnexpress.net/ngan-hang-so-cake-tang-iphone-17-cho-khach-gui-tiet-kiem-4963440.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Băn khoăn 'cưỡng ép vợ hoặc chồng quan hệ tình dục bị phạt đến 30 triệu đồng'",
+        "link": "https://vnexpress.net/cuong-ep-vo-chong-quan-he-bi-phat-30-trieu-dong-4964118.html",
+        "pubDate": "Fri, 14 Nov 2025 20:00:00 +0700"
       },
       {
-        "title": "Thoát chạy thận sau hai tháng lọc máu",
-        "link": "https://vnexpress.net/thoat-chay-than-sau-hai-thang-loc-mau-4963374.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Chồng hơn tôi 20 tuổi, nuôi một con với chúng tôi cũng quá khó khăn",
+        "link": "https://vnexpress.net/chong-hon-toi-20-tuoi-nuoi-mot-con-voi-chung-toi-cung-qua-kho-khan-4964058.html",
+        "pubDate": "Fri, 14 Nov 2025 20:00:00 +0700"
       },
       {
-        "title": "Acecook Việt Nam ra mắt website mới",
-        "link": "https://vnexpress.net/acecook-viet-nam-ra-mat-website-moi-4963373.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "Tử tù được tha chết ngay trước giờ hành hình",
+        "link": "https://vnexpress.net/tu-tu-duoc-tha-chet-ngay-truoc-gio-hanh-hinh-4963985.html",
+        "pubDate": "Fri, 14 Nov 2025 20:00:00 +0700"
       },
       {
-        "title": "Phong cách sống giữa không gian lớn tại đô thị Gold Coast Vung Tau",
-        "link": "https://vnexpress.net/phong-cach-song-giua-khong-gian-lon-tai-do-thi-gold-coast-vung-tau-4963127.html",
-        "pubDate": "Thu, 13 Nov 2025 11:00:00 +0700"
+        "title": "VNPAY phối hợp Đà Nẵng hỗ trợ hộ kinh doanh chuyển đổi cách nộp thuế",
+        "link": "https://vnexpress.net/vnpay-phoi-hop-da-nang-ho-tro-ho-kinh-doanh-chuyen-doi-cach-nop-thue-4964138.html",
+        "pubDate": "Fri, 14 Nov 2025 20:00:00 +0700"
       },
       {
-        "title": "Lý do ba thẩm phán livestream bán hàng tại tòa",
-        "link": "https://vnexpress.net/ly-do-ba-tham-phan-livestream-ban-hang-tai-toa-4963410.html",
-        "pubDate": "Thu, 13 Nov 2025 10:57:57 +0700"
+        "title": "Não bộ 'bùng cháy' thế nào lúc thăng hoa?",
+        "link": "https://vnexpress.net/nao-bo-bung-chay-the-nao-luc-thang-hoa-4964110.html",
+        "pubDate": "Fri, 14 Nov 2025 20:00:00 +0700"
       },
       {
-        "title": "Những người trẻ Trung Quốc 'ăn hai bữa một ngày với 1 USD'",
-        "link": "https://vnexpress.net/nhung-nguoi-tre-trung-quoc-an-hai-bua-mot-ngay-voi-1-usd-4963072.html",
-        "pubDate": "Thu, 13 Nov 2025 10:54:15 +0700"
+        "title": "Lính Triều Tiên hỗ trợ Nga dò mìn ở Kursk",
+        "link": "https://vnexpress.net/linh-trieu-tien-ho-tro-nga-do-min-o-kursk-4964172.html",
+        "pubDate": "Fri, 14 Nov 2025 19:55:58 +0700"
       },
       {
-        "title": "TP HCM kêu gọi hiến máu khi kho dự trữ giảm 50%",
-        "link": "https://vnexpress.net/tp-hcm-keu-goi-hien-mau-khi-kho-du-tru-giam-50-4963354.html",
-        "pubDate": "Thu, 13 Nov 2025 10:45:53 +0700"
+        "title": "Thủ tướng Đức: Thanh niên Ukraine cần ở lại phục vụ đất nước",
+        "link": "https://vnexpress.net/thu-tuong-duc-thanh-nien-ukraine-can-o-lai-phuc-vu-dat-nuoc-4964076.html",
+        "pubDate": "Fri, 14 Nov 2025 19:38:05 +0700"
       }
     ],
-    "time": 1763012742.636696
-  },
-  "market_data": {
-    "data": {
-      "forex": {
-        "DXY": {
-          "price": 99.55,
-          "change": "▼",
-          "percent": 0.0
-        },
-        "EURUSD": {
-          "price": 1.16,
-          "change": "▼",
-          "percent": -0.06
-        },
-        "USDJPY": {
-          "price": 154.92,
-          "change": "▲",
-          "percent": 0.06
-        },
-        "USDCHF": {
-          "price": 0.8,
-          "change": "▲",
-          "percent": 0.06
-        },
-        "GBPUSD": {
-          "price": 1.31,
-          "change": "▼",
-          "percent": -0.03
-        },
-        "AUDUSD": {
-          "price": 0.66,
-          "change": "▲",
-          "percent": 0.03
-        },
-        "USDVND": {
-          "price": 26325.0,
-          "change": "▼",
-          "percent": 0.0
-        }
-      },
-      "stock": {
-        "VNINDEX": {
-          "price": 1634.49,
-          "change": "▼",
-          "percent": 0.0
-        },
-        "DJIA": {
-          "price": 48261.05,
-          "change": "▼",
-          "percent": -0.1
-        },
-        "NASDAQ": {
-          "price": 23410.03,
-          "change": "▲",
-          "percent": 0.05
-        },
-        "S&P500": {
-          "price": 6852.0,
-          "change": "▼",
-          "percent": -0.02
-        },
-        "KOSPI": {
-          "price": 4174.64,
-          "change": "▲",
-          "percent": 0.16
-        },
-        "NIKKEI": {
-          "price": 51226.86,
-          "change": "▼",
-          "percent": -0.05
-        },
-        "SHANGHAI": {
-          "price": 4023.09,
-          "change": "▲",
-          "percent": 0.06
-        }
-      },
-      "crypto": {
-        "BTCUSDT": {
-          "price": 102518.8,
-          "change": "▲",
-          "percent": 0.37
-        },
-        "ETHUSDT": {
-          "price": 3508.65,
-          "change": "▲",
-          "percent": 0.69
-        },
-        "XRPUSDT": {
-          "price": 2.47,
-          "change": "▼",
-          "percent": -0.01
-        },
-        "BNBUSDT": {
-          "price": 966.29,
-          "change": "▲",
-          "percent": 0.52
-        }
-      },
-      "commodity": {
-        "Gold": {
-          "price": 4216.8,
-          "change": "▲",
-          "percent": 0.61
-        },
-        "Silver": {
-          "price": 54.22,
-          "change": "▲",
-          "percent": 2.31
-        },
-        "Brent": {
-          "price": 62.44,
-          "change": "▲",
-          "percent": 0.45
-        },
-        "Crude": {
-          "price": 58.38,
-          "change": "▲",
-          "percent": 0.22
-        }
-      },
-      "symbols": [
-        {
-          "symbol": "PVD",
-          "highest_price": 24700,
-          "lowest_price": 16282
-        },
-        {
-          "symbol": "VEA",
-          "highest_price": 41920,
-          "lowest_price": 36202
-        },
-        {
-          "symbol": "HHP",
-          "highest_price": 12800,
-          "lowest_price": 8140
-        },
-        {
-          "symbol": "VNM",
-          "highest_price": 62183,
-          "lowest_price": 47971
-        },
-        {
-          "symbol": "HID",
-          "highest_price": 4680,
-          "lowest_price": 2500
-        },
-        {
-          "symbol": "MCH",
-          "highest_price": 212468,
-          "lowest_price": 104009
-        },
-        {
-          "symbol": "HAG",
-          "highest_price": 17350,
-          "lowest_price": 9810
-        },
-        {
-          "symbol": "MSH",
-          "highest_price": 41135,
-          "lowest_price": 26168
-        },
-        {
-          "symbol": "DCL",
-          "highest_price": 37050,
-          "lowest_price": 19850
-        },
-        {
-          "symbol": "VIC",
-          "highest_price": 220100,
-          "lowest_price": 39900
-        },
-        {
-          "symbol": "HAH",
-          "highest_price": 64400,
-          "lowest_price": 33400
-        }
-      ],
-      "updated": "2025-11-13T04:01:28.181097Z"
-    },
-    "time": 1763012863.604032
-  },
-  "finance": {
-    "data": [
-      {
-        "title": "Elon Musk in a post on X says some of his Trump posts ‘went too far’ and that he regrets them",
-        "link": "https://www.marketwatch.com/story/elon-musk-in-a-post-on-x-says-some-of-his-trump-posts-went-too-far-and-that-he-regrets-them-90e73a6a?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Wed, 11 Jun 2025 07:09:00 GMT"
-      },
-      {
-        "title": "Bank of England decision on Thursday will be at 12:02 p.m. local time instead of 12 p.m., due to VE Day’s two minutes of silence",
-        "link": "https://www.marketwatch.com/story/bank-of-england-decision-on-thursday-will-be-at-12-02-p-m-local-time-instead-of-12-p-m-due-to-ve-day-two-minutes-of-silence-1f6bed66?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Tue, 06 May 2025 11:59:00 GMT"
-      },
-      {
-        "title": "Swiss National Bank cuts interest rates by a half point to 0.5%",
-        "link": "https://www.marketwatch.com/story/swiss-national-bank-cuts-interest-rates-by-a-half-point-to-0-5-ed1fce78?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Thu, 12 Dec 2024 08:32:00 GMT"
-      },
-      {
-        "title": "Dollar jumps 0.5% to 0.8890 francs",
-        "link": "https://www.marketwatch.com/story/dollar-jumps-0-5-to-0-8890-francs-047c6b4d?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Thu, 12 Dec 2024 08:32:00 GMT"
-      },
-      {
-        "title": "Germany flash manufacturing PMI rises to 4-month high of 43.2",
-        "link": "https://www.marketwatch.com/story/germany-flash-manufacturing-pmi-rises-to-4-month-high-of-43-2-b9e50a64?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Fri, 22 Nov 2024 08:34:00 GMT"
-      },
-      {
-        "title": "Germany flash services PMI falls to 9-month low of 49.4",
-        "link": "https://www.marketwatch.com/story/germany-flash-services-pmi-falls-to-9-month-low-of-49-4-5e5d2763?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Fri, 22 Nov 2024 08:34:00 GMT"
-      },
-      {
-        "title": "Powell says labor market not a source of significant inflation pressure",
-        "link": "https://www.marketwatch.com/story/powell-says-labor-market-not-a-source-of-significant-inflation-pressure-cc3b1297?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Wed, 31 Jul 2024 18:48:00 GMT"
-      },
-      {
-        "title": "Fed’s Powell says rate cut ‘on the table’ as soon as September",
-        "link": "https://www.marketwatch.com/story/feds-powell-says-rate-cut-on-the-table-as-soon-as-september-f3f7c8f2?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Wed, 31 Jul 2024 18:41:00 GMT"
-      },
-      {
-        "title": "Final S&P U.S. manufacturing index is 52.2 in February vs. initial 51.5",
-        "link": "https://www.marketwatch.com/story/final-s-p-u-s-manufacturing-index-is-52-2-in-february-vs-initial-51-5-180b7107?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Fri, 01 Mar 2024 14:47:00 GMT"
-      },
-      {
-        "title": "Duolingo started at buy with $222 price target at Seaport",
-        "link": "https://www.marketwatch.com/story/duolingo-started-at-buy-with-222-price-target-at-seaport-f762126a?mod=mw_rss_realtimeheadlines",
-        "pubDate": "Tue, 27 Feb 2024 12:40:00 GMT"
-      }
-    ],
-    "time": 1763017351.5023518
+    "time": 1763133835.3360577
   }
 }

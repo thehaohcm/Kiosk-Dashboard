@@ -5,102 +5,31 @@
   <title>Tin tài chính</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="slide-page">
+<body class="portrait">
   <header class="topbar">
-    <div class="brand">Dow Jones - Tin tài chính</div>
+    <div class="brand">💰 Tin tài chính</div>
     <div class="datetime" id="clock">--:--:--</div>
   </header>
 
-  <div class="container">
-    <h1>💰 Tin tài chính (Dow Jones)</h1>
+  <main class="main-center">
+    <section class="card">
+      <h3>Tin tài chính (DowJones)</h3>
+      <div id="skeleton" class="skeleton-list">{% for i in range(6) %}<div class="skeleton-item"><div class="skeleton-title shimmer"></div><div class="skeleton-line shimmer"></div></div>{% endfor %}</div>
+      <ul id="finance-list" class="news-list" style="display:none;"></ul>
+    </section>
+  </main>
 
-    <div id="skeleton-list" class="skeleton-list">
-      {% for i in range(6) %}
-      <div class="skeleton-item">
-        <div class="skeleton-title shimmer"></div>
-        <div class="skeleton-line shimmer"></div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div id="finance-content" style="display:none;">
-      <ul class="news-list" id="finance-list"></ul>
-    </div>
-  </div>
-
-  <script>
-    const pages = ["/weather", "/news", "/market", "/finance"];
-    let idx = pages.indexOf(window.location.pathname);
-    if (idx === -1) idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % pages.length;
-      window.location.href = pages[idx];
-    }, 180000);
-
-    document.body.classList.add("slide-page");
-    document.body.style.transition = "transform 0.7s ease-in-out, opacity 0.7s ease-in-out";
-    document.body.style.transform = "translateX(0)";
-    document.body.style.opacity = "1";
-    window.addEventListener("beforeunload", () => {
-      document.body.style.transform = "translateX(-50px)";
-      document.body.style.opacity = "0";
-    });
-
-    function updateClock() {
-      const now = new Date();
-      const opts = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false,
-                    year: 'numeric', month: '2-digit', day: '2-digit',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      const clock = document.getElementById('clock');
-      if (clock) clock.textContent = new Intl.DateTimeFormat('vi-VN', opts).format(now);
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    async function loadFinance() {
-      const skeleton = document.getElementById('skeleton-list');
-      const cont = document.getElementById('finance-content');
-      const list = document.getElementById('finance-list');
-      skeleton.style.display = 'block';
-      cont.style.display = 'none';
-      try {
-        const res = await fetch('/finance_json');
-        const items = await res.json();
-        list.innerHTML = '';
-        items.forEach(i => {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="${i.link}" target="_blank">${i.title}</a><p class="time">${i.pubDate}</p>`;
-          list.appendChild(li);
-        });
-      } catch (e) {
-        list.innerHTML = `<li>Lỗi tải tin: ${e}</li>`;
-      } finally {
-        skeleton.style.display = 'none';
-        cont.style.display = 'block';
-      }
-    }
-    loadFinance();
-
-    /* ======= Preload images (OpenWeather icons + local icons) ======= */
-    (function preloadImages() {
-    const imgs = [
-        // OpenWeather sample icons you might use (replace with icons your template actually uses)
-        "http://openweathermap.org/img/wn/01d@2x.png",
-        "http://openweathermap.org/img/wn/02d@2x.png",
-        "http://openweathermap.org/img/wn/03d@2x.png",
-        "http://openweathermap.org/img/wn/04d@2x.png",
-        "http://openweathermap.org/img/wn/09d@2x.png",
-        "http://openweathermap.org/img/wn/10d@2x.png",
-        // local icons (example)
-        "/static/img/weather/clear.png",
-        "/static/img/weather/cloud.png",
-        "/static/img/weather/rain.png"
-    ];
-    imgs.forEach(url => {
-        const i = new Image();
-        i.src = url;
-    });
-    })();
-  </script>
+<script>
+async function loadFinance(){
+  const sk=document.getElementById('skeleton'), list=document.getElementById('finance-list');
+  sk.style.display='block'; list.style.display='none';
+  try{
+    const res=await fetch('/finance_json'); const items=await res.json();
+    list.innerHTML=''; items.forEach(i=>{ const li=document.createElement('li'); li.innerHTML=`<a href="${i.link}" target="_blank">${i.title}</a><div class="time">${i.pubDate}</div>`; list.appendChild(li); });
+  }catch(e){ list.innerHTML=`<li>Lỗi tải tin: ${e}</li>`; }
+  finally{ sk.style.display='none'; list.style.display='block'; }
+}
+loadFinance(); function updateClock(){const now=new Date();const opts={timeZone:'Asia/Ho_Chi_Minh',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'};document.getElementById('clock').textContent=new Intl.DateTimeFormat('vi-VN',opts).format(now);}updateClock();setInterval(updateClock,1000);
+</script>
 </body>
 </html>
