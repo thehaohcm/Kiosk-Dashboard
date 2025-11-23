@@ -5,7 +5,27 @@ import QtGraphicalEffects 1.15
 
 Rectangle {
     id: root
-    color: "#f5f5f5"
+    color: "#000814"
+    radius: 15
+    border.color: "#00d4ff"
+    border.width: 2
+    opacity: 0.95
+    
+    // Gradient background for futuristic effect
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#001d3d" }
+        GradientStop { position: 1.0; color: "#000814" }
+    }
+    
+    // Glow effect
+    layer.enabled: true
+    layer.effect: DropShadow {
+        transparentBorder: true
+        color: "#00d4ff"
+        radius: 20
+        samples: 25
+        spread: 0.2
+    }
 
     // 信号定义 - 与 Python 回调对接
     signal manualButtonPressed()
@@ -33,8 +53,17 @@ Rectangle {
             id: titleBar
             Layout.fillWidth: true
             Layout.preferredHeight: 36
-            color: "#f7f8fa"
+            color: "transparent"
             border.width: 0
+            
+            // Holographic line at bottom
+            Rectangle {
+                anchors.bottom: parent.bottom
+                width: parent.width
+                height: 1
+                color: "#00d4ff"
+                opacity: 0.6
+            }
 
             // 整条标题栏拖动（使用屏幕坐标，避免累计误差导致抖动）
             // 放在最底层，让按钮的 MouseArea 可以优先响应
@@ -69,9 +98,16 @@ Rectangle {
                 Rectangle {
                     id: btnMin
                     width: 24; height: 24; radius: 6
-                    color: btnMinMouse.pressed ? "#e5e6eb" : (btnMinMouse.containsMouse ? "#f2f3f5" : "transparent")
+                    color: btnMinMouse.pressed ? "#003566" : (btnMinMouse.containsMouse ? "#004d8f" : "transparent")
+                    border.color: btnMinMouse.containsMouse ? "#00d4ff" : "#003566"
+                    border.width: 1
                     z: 2  // 确保按钮在最上层
-                    Text { anchors.centerIn: parent; text: "–"; font.pixelSize: 14; color: "#4e5969" }
+                    Text {
+                        anchors.centerIn: parent;
+                        text: "–";
+                        font.pixelSize: 14;
+                        color: btnMinMouse.containsMouse ? "#00d4ff" : "#8b9dc3"
+                    }
                     MouseArea {
                         id: btnMinMouse
                         anchors.fill: parent
@@ -84,9 +120,16 @@ Rectangle {
                 Rectangle {
                     id: btnClose
                     width: 24; height: 24; radius: 6
-                    color: btnCloseMouse.pressed ? "#f53f3f" : (btnCloseMouse.containsMouse ? "#ff7875" : "transparent")
+                    color: btnCloseMouse.pressed ? "#8b0000" : (btnCloseMouse.containsMouse ? "#dc143c" : "transparent")
+                    border.color: btnCloseMouse.containsMouse ? "#ff4757" : "#8b0000"
+                    border.width: 1
                     z: 2  // 确保按钮在最上层
-                    Text { anchors.centerIn: parent; text: "×"; font.pixelSize: 14; color: btnCloseMouse.containsMouse ? "white" : "#86909c" }
+                    Text {
+                        anchors.centerIn: parent;
+                        text: "×";
+                        font.pixelSize: 14;
+                        color: btnCloseMouse.containsMouse ? "#ff4757" : "#8b9dc3"
+                    }
                     MouseArea {
                         id: btnCloseMouse
                         anchors.fill: parent
@@ -113,16 +156,27 @@ Rectangle {
                 Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 40
-                    color: "#E3F2FD"
+                    color: "transparent"
+                    border.color: "#00d4ff"
+                    border.width: 1
                     radius: 10
 
                     Text {
                         anchors.centerIn: parent
                         text: displayModel ? displayModel.statusText : "Trạng thái: Chưa kết nối"
-                        font.family: "PingFang SC, Microsoft YaHei UI"
+                        font.family: "Consolas, Monaco, monospace"
                         font.pixelSize: 14
                         font.weight: Font.Bold
-                        color: "#2196F3"
+                        color: "#00d4ff"
+                    }
+                    
+                    // Holographic glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 8
+                        samples: 16
+                        spread: 0.3
                     }
                 }
 
@@ -207,17 +261,29 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 60
                     color: "transparent"
+                    border.color: "#003566"
+                    border.width: 1
+                    radius: 8
 
                     Text {
                         anchors.fill: parent
                         anchors.margins: 10
-                        text: displayModel ? displayModel.ttsText : "Sẵn sàng"
-                        font.family: "PingFang SC, Microsoft YaHei UI"
+                        text: displayModel ? displayModel.ttsText : "SẴN SÀNG"
+                        font.family: "Consolas, Monaco, monospace"
                         font.pixelSize: 13
-                        color: "#555555"
+                        color: "#00d4ff"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         wrapMode: Text.WordWrap
+                    }
+                    
+                    // Subtle glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 3
+                        samples: 8
+                        spread: 0.2
                     }
                 }
             }
@@ -227,7 +293,9 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 72
-            color: "#f7f8fa"
+            color: "transparent"
+            border.color: "#003566"
+            border.width: 1
 
             RowLayout {
                 anchors.fill: parent
@@ -243,28 +311,40 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 140
                     Layout.preferredHeight: 38
-                    text: "Nhấn và giữ để nói"
+                    text: "NHẤN VÀ GIỮ ĐỂ NÓI"
                     visible: displayModel ? !displayModel.autoMode : true
 
                     background: Rectangle {
-                        color: manualBtn.pressed ? "#0e42d2" : (manualBtn.hovered ? "#4080ff" : "#165dff")
+                        color: manualBtn.pressed ? "#003566" : (manualBtn.hovered ? "#0066cc" : "#00d4ff")
                         radius: 8
+                        border.color: "#00d4ff"
+                        border.width: 1
 
                         Behavior on color { ColorAnimation { duration: 120; easing.type: Easing.OutCubic } }
                     }
 
                     contentItem: Text {
                         text: manualBtn.text
-                        font.family: "PingFang SC, Microsoft YaHei UI"
-                        font.pixelSize: 12
-                        color: "white"
+                        font.family: "Consolas, Monaco, monospace"
+                        font.pixelSize: 11
+                        font.weight: Font.Bold
+                        color: "black"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
 
-                    onPressed: { manualBtn.text = "Thả để dừng"; root.manualButtonPressed() }
-                    onReleased: { manualBtn.text = "Nhấn và giữ để nói"; root.manualButtonReleased() }
+                    onPressed: { manualBtn.text = "THẢ ĐỂ DỪNG"; root.manualButtonPressed() }
+                    onReleased: { manualBtn.text = "NHẤN VÀ GIỮ ĐỂ NÓI"; root.manualButtonReleased() }
+                    
+                    // Glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 6
+                        samples: 12
+                        spread: 0.4
+                    }
                 }
 
                 // 自动模式按钮 - 主色
@@ -274,25 +354,37 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 140
                     Layout.preferredHeight: 38
-                    text: displayModel ? displayModel.buttonText : "开始对话"
+                    text: displayModel ? displayModel.buttonText : "BẮT ĐẦU HỘI THOẠI"
                     visible: displayModel ? displayModel.autoMode : false
 
                     background: Rectangle {
-                        color: autoBtn.pressed ? "#0e42d2" : (autoBtn.hovered ? "#4080ff" : "#165dff")
+                        color: autoBtn.pressed ? "#003566" : (autoBtn.hovered ? "#0066cc" : "#00d4ff")
                         radius: 8
+                        border.color: "#00d4ff"
+                        border.width: 1
                         Behavior on color { ColorAnimation { duration: 120; easing.type: Easing.OutCubic } }
                     }
 
                     contentItem: Text {
                         text: autoBtn.text
-                        font.family: "PingFang SC, Microsoft YaHei UI"
-                        font.pixelSize: 12
-                        color: "white"
+                        font.family: "Consolas, Monaco, monospace"
+                        font.pixelSize: 11
+                        font.weight: Font.Bold
+                        color: "black"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
                     onClicked: root.autoButtonClicked()
+                    
+                    // Glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 6
+                        samples: 12
+                        spread: 0.4
+                    }
                 }
 
                 // 打断对话 - 次要色
@@ -302,19 +394,34 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 120
                     Layout.preferredHeight: 38
-                    text: "Ngắt cuộc hội thoại"
+                    text: "NGẮT HỘI THOẠI"
 
-                    background: Rectangle { color: abortBtn.pressed ? "#e5e6eb" : (abortBtn.hovered ? "#f2f3f5" : "#eceff3"); radius: 8 }
+                    background: Rectangle {
+                        color: abortBtn.pressed ? "#8b0000" : (abortBtn.hovered ? "#dc143c" : "transparent")
+                        radius: 8
+                        border.color: "#ff4757"
+                        border.width: 1
+                    }
                     contentItem: Text {
                         text: abortBtn.text
-                        font.family: "PingFang SC, Microsoft YaHei UI"
-                        font.pixelSize: 12
-                        color: "#1d2129"
+                        font.family: "Consolas, Monaco, monospace"
+                        font.pixelSize: 11
+                        font.weight: Font.Bold
+                        color: "#ff4757"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
                     onClicked: root.abortButtonClicked()
+                    
+                    // Red glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#ff4757"
+                        radius: 4
+                        samples: 8
+                        spread: 0.3
+                    }
                 }
 
                 // 输入 + 发送
@@ -377,18 +484,33 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 120
                     Layout.preferredHeight: 38
-                    text: displayModel ? displayModel.modeText : "Hội thoại thủ công"
-                    background: Rectangle { color: modeBtn.pressed ? "#e5e6eb" : (modeBtn.hovered ? "#f2f3f5" : "#eceff3"); radius: 8 }
+                    text: displayModel ? displayModel.modeText : "HỘI THOẠI THỦ CÔNG"
+                    background: Rectangle {
+                        color: modeBtn.pressed ? "#003566" : (modeBtn.hovered ? "#004d8f" : "transparent")
+                        radius: 8
+                        border.color: modeBtn.hovered ? "#00d4ff" : "#003566"
+                        border.width: 1
+                    }
                     contentItem: Text {
                         text: modeBtn.text
-                        font.family: "PingFang SC, Microsoft YaHei UI"
-                        font.pixelSize: 12
-                        color: "#1d2129"
+                        font.family: "Consolas, Monaco, monospace"
+                        font.pixelSize: 10
+                        font.weight: Font.Bold
+                        color: modeBtn.hovered ? "#00d4ff" : "#8b9dc3"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
                     onClicked: root.modeButtonClicked()
+                    
+                    // Subtle glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 3
+                        samples: 6
+                        spread: 0.2
+                    }
                 }
 
                 // 设置（次要）
@@ -398,18 +520,33 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 120
                     Layout.preferredHeight: 38
-                    text: "Cấu hình"
-                    background: Rectangle { color: settingsBtn.pressed ? "#e5e6eb" : (settingsBtn.hovered ? "#f2f3f5" : "#eceff3"); radius: 8 }
+                    text: "CẤU HÌNH"
+                    background: Rectangle {
+                        color: settingsBtn.pressed ? "#003566" : (settingsBtn.hovered ? "#004d8f" : "transparent")
+                        radius: 8
+                        border.color: settingsBtn.hovered ? "#00d4ff" : "#003566"
+                        border.width: 1
+                    }
                     contentItem: Text {
                         text: settingsBtn.text
-                        font.family: "PingFang SC, Microsoft YaHei UI"
-                        font.pixelSize: 12
-                        color: "#1d2129"
+                        font.family: "Consolas, Monaco, monospace"
+                        font.pixelSize: 11
+                        font.weight: Font.Bold
+                        color: settingsBtn.hovered ? "#00d4ff" : "#8b9dc3"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
                     onClicked: root.settingsButtonClicked()
+                    
+                    // Subtle glow effect
+                    layer.enabled: true
+                    layer.effect: Glow {
+                        color: "#00d4ff"
+                        radius: 3
+                        samples: 6
+                        spread: 0.2
+                    }
                 }
             }
         }

@@ -32,11 +32,11 @@ class GuiDisplayModel(QObject):
         super().__init__(parent)
 
         # 私有属性
-        self._status_text = "Trạng thái: Chưa kết nối"
+        self._status_text = "TRẠNG THÁI: CHƯA KẾT NỐI"
         self._emotion_path = ""  # 表情资源路径（GIF/图片）或 emoji 字符
-        self._tts_text = "Sẵn sàng"
-        self._button_text = "Bắt đầu hội thoại"  # Văn bản nút chế độ tự động
-        self._mode_text = "Hội thoại thủ công"  # Văn bản nút chuyển đổi chế độ
+        self._tts_text = "SẴN SÀNG"
+        self._button_text = "BẮT ĐẦU HỘI THOẠI"  # Văn bản nút chế độ tự động
+        self._mode_text = "HỘI THOẠI THỦ CÔNG"  # Văn bản nút chuyển đổi chế độ
         self._auto_mode = False  # 是否自动模式
         self._is_connected = False
 
@@ -144,6 +144,6 @@ class GuiDisplayModel(QObject):
         """
         self.autoMode = is_auto
         if is_auto:
-            self.modeText = "Hội thoại tự động"
+            self.modeText = "HỘI THOẠI TỰ ĐỘNG"
         else:
-            self.modeText = "Hội thoại thủ công"
+            self.modeText = "HỘI THOẠI THỦ CÔNG"

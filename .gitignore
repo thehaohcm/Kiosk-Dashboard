@@ -1,0 +1,29 @@
+# Python cache
+**/__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+venv/
+py-xiaozhi/.venv
+
+# Project specific
+py-xiaozhi/logs/
+py-xiaozhi/config/
+py-xiaozhi/cache/
+py-xiaozhi/models/
+py-xiaozhi/build/
+py-xiaozhi/dist/
+py-xiaozhi/.idea/
+py-xiaozhi/xiaozhi.spec
+py-xiaozhi/installer/
+
+# macOS
+**/.DS_Store
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
