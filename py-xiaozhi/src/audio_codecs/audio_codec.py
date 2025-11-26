@@ -9,6 +9,7 @@ import sounddevice as sd
 import soxr
 
 from src.audio_codecs.aec_processor import AECProcessor
+from src.audio_codecs.robot_voice_processor import RobotVoiceProcessor
 from src.constants.constants import AudioConfig
 from src.utils.audio_utils import (
     downmix_to_mono,
@@ -142,9 +143,30 @@ class AudioCodec:
                 except Exception as e:
                     logger.warning(f"AEC处理器初始化失败: {e}")
                     self._aec_enabled = False
+            
+            # Khởi tạo Robot Voice Processor
+            try:
+                robot_voice_config = self.config.get_config("ROBOT_VOICE", {})
+                self.robot_voice_enabled = robot_voice_config.get("enabled", False)
+                
+                if self.robot_voice_enabled:
+                    self.robot_voice_processor = RobotVoiceProcessor(
+                        sample_rate=AudioConfig.OUTPUT_SAMPLE_RATE,
+                        enabled=True,
+                        pitch_shift_semitones=robot_voice_config.get("pitch_shift", 0.0),
+                        ring_mod_freq=robot_voice_config.get("ring_mod_freq", 30.0),
+                        ring_mod_depth=robot_voice_config.get("ring_mod_depth", 0.3),
+                        bit_depth=robot_voice_config.get("bit_depth", 12),
+                        metallic_echo=robot_voice_config.get("metallic_echo", True),
+                        echo_delay_ms=robot_voice_config.get("echo_delay_ms", 50.0),
+                        echo_decay=robot_voice_config.get("echo_decay", 0.3),
+                    )
+                    logger.info(f"Robot Voice Processor đã khởi tạo: {'BẬT' if self.robot_voice_enabled else 'TẮT'}")
+            except Exception as e:
+                logger.warning(f"Robot Voice Processor khởi tạo thất bại: {e}")
+                self.robot_voice_enabled = False
 
             logger.info("AudioCodec 初始化完成")
-
         except Exception as e:
             logger.error(f"初始化音频设备失败: {e}")
             await self.close()
@@ -637,6 +659,13 @@ class AudioCodec:
                     f"解码音频长度异常: {len(audio_array)}, 期望: {expected_length}"
                 )
                 return
+            
+            # Xử lý Robot Voice (nếu bật)
+            if self.robot_voice_enabled and self.robot_voice_processor:
+                try:
+                    audio_array = self.robot_voice_processor.process(audio_array)
+                except Exception as e:
+                    logger.warning(f"Robot voice xử lý thất bại, sử dụng audio gốc: {e}")
 
             # 放入播放队列（使用工具函数安全入队）
             if not safe_queue_put(
