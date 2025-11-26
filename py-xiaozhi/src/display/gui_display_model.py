@@ -15,6 +15,7 @@ class GuiDisplayModel(QObject):
     statusTextChanged = pyqtSignal()
     emotionPathChanged = pyqtSignal()
     ttsTextChanged = pyqtSignal()
+    conversationHistoryChanged = pyqtSignal()
     buttonTextChanged = pyqtSignal()
     modeTextChanged = pyqtSignal()
     autoModeChanged = pyqtSignal()
@@ -35,6 +36,7 @@ class GuiDisplayModel(QObject):
         self._status_text = "TRẠNG THÁI: CHƯA KẾT NỐI"
         self._emotion_path = ""  # 表情资源路径（GIF/图片）或 emoji 字符
         self._tts_text = "SẴN SÀNG"
+        self._conversation_history = ""  # Lịch sử hội thoại đầy đủ
         self._button_text = "BẮT ĐẦU HỘI THOẠI"  # Văn bản nút chế độ tự động
         self._mode_text = "HỘI THOẠI THỦ CÔNG"  # Văn bản nút chuyển đổi chế độ
         self._auto_mode = False  # 是否自动模式
@@ -72,6 +74,17 @@ class GuiDisplayModel(QObject):
         if self._tts_text != value:
             self._tts_text = value
             self.ttsTextChanged.emit()
+
+    # Lịch sử hội thoại
+    @pyqtProperty(str, notify=conversationHistoryChanged)
+    def conversationHistory(self):
+        return self._conversation_history
+
+    @conversationHistory.setter
+    def conversationHistory(self, value):
+        if self._conversation_history != value:
+            self._conversation_history = value
+            self.conversationHistoryChanged.emit()
 
     # 自动模式按钮文本属性
     @pyqtProperty(str, notify=buttonTextChanged)
@@ -116,9 +129,16 @@ class GuiDisplayModel(QObject):
 
     def update_text(self, text: str):
         """
-        Cập nhật văn bản TTS.
+        Cập nhật văn bản TTS và thêm vào lịch sử.
         """
         self.ttsText = text
+        # Thêm vào lịch sử nếu không phải text mặc định
+        if text and text != "SẴN SÀNG":
+            if self._conversation_history:
+                self._conversation_history += "\n\n" + text
+            else:
+                self._conversation_history = text
+            self.conversationHistoryChanged.emit()
 
     def update_emotion(self, emotion_path: str):
         """

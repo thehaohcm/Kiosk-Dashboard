@@ -302,25 +302,78 @@ Rectangle {
                     }
                 }
 
-                // TTS 文本显示区域
+                // TTS 文本显示区域 - với Flickable để scroll
                 Rectangle {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 60
+                    Layout.fillHeight: true
+                    Layout.minimumHeight: 80
+                    Layout.preferredHeight: 120
                     color: "transparent"
                     border.color: "#003566"
                     border.width: 1
                     radius: 8
 
-                    Text {
+                    Flickable {
+                        id: textFlickable
                         anchors.fill: parent
-                        anchors.margins: 10
-                        text: displayModel ? displayModel.ttsText : "SẴN SÀNG"
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 13
-                        color: "#00d4ff"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        wrapMode: Text.WordWrap
+                        anchors.margins: 8
+                        clip: true
+                        contentHeight: ttsTextContent.implicitHeight
+                        boundsBehavior: Flickable.StopAtBounds
+                        
+                        ScrollBar.vertical: ScrollBar {
+                            policy: ScrollBar.AsNeeded
+                            width: 8
+                            contentItem: Rectangle {
+                                implicitWidth: 6
+                                radius: 3
+                                color: parent.pressed ? "#00d4ff" : (parent.hovered ? "#0088cc" : "#003566")
+                                opacity: parent.active ? 0.8 : 0.5
+                            }
+                        }
+
+                        Text {
+                            id: ttsTextContent
+                            width: textFlickable.width - 10
+                            text: displayModel ? (displayModel.conversationHistory || displayModel.ttsText || "SẴN SÀNG") : "SẴN SÀNG"
+                            font.family: "Consolas, Monaco, monospace"
+                            font.pixelSize: 13
+                            color: "#00d4ff"
+                            wrapMode: Text.WordWrap
+                            textFormat: Text.PlainText
+                            leftPadding: 5
+                            rightPadding: 5
+                            topPadding: 5
+                            bottomPadding: 5
+                            // Căn giữa khi text ngắn, căn trái khi text dài
+                            horizontalAlignment: (displayModel && displayModel.conversationHistory && displayModel.conversationHistory.length > 50) ? Text.AlignLeft : Text.AlignHCenter
+                            // Đảm bảo chiều cao tối thiểu bằng parent khi text ngắn để căn giữa
+                            height: Math.max(implicitHeight, textFlickable.height)
+                            verticalAlignment: Text.AlignVCenter
+                            
+                            // Tự động scroll xuống cuối khi có text mới
+                            onTextChanged: {
+                                if (displayModel && displayModel.conversationHistory) {
+                                    textFlickable.contentY = Math.max(0, textFlickable.contentHeight - textFlickable.height)
+                                }
+                            }
+                        }
+                        
+                        // Scroll bằng chuột
+                        MouseArea {
+                            anchors.fill: parent
+                            onWheel: {
+                                if (wheel.angleDelta.y > 0) {
+                                    textFlickable.contentY = Math.max(0, textFlickable.contentY - 30)
+                                } else {
+                                    textFlickable.contentY = Math.min(
+                                        textFlickable.contentHeight - textFlickable.height,
+                                        textFlickable.contentY + 30
+                                    )
+                                }
+                            }
+                            onPressed: mouse.accepted = false
+                        }
                     }
                     
                     // Subtle glow effect
