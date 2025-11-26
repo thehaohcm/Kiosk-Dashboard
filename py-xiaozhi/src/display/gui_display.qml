@@ -10,6 +10,7 @@ Rectangle {
     border.color: "#00d4ff"
     border.width: 2
     opacity: 0.95
+    focus: true
     
     // Gradient background for futuristic effect
     gradient: Gradient {
@@ -41,6 +42,51 @@ Rectangle {
     signal titleDragStart(real mouseX, real mouseY)
     signal titleDragMoveTo(real mouseX, real mouseY)
     signal titleDragEnd()
+
+    // Xử lý phím Space để kích hoạt chức năng nói
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Space && !event.isAutoRepeat) {
+            // Chỉ kích hoạt khi đang ở chế độ thủ công (manual mode) và không đang nhập văn bản
+            if (displayModel && !displayModel.autoMode && !textInput.activeFocus) {
+                // Đảm bảo root có focus để nhận phím
+                root.forceActiveFocus()
+                
+                manualBtn.text = "THẢ ĐỂ DỪNG"
+                root.manualButtonPressed()
+                event.accepted = true
+            }
+        }
+        // Phím C để ngắt hội thoại
+        else if (event.key === Qt.Key_C && !textInput.activeFocus) {
+            root.abortButtonClicked()
+            root.forceActiveFocus()
+            event.accepted = true
+        }
+        // Phím I để focus vào textbox
+        else if (event.key === Qt.Key_I && !textInput.activeFocus) {
+            textInput.forceActiveFocus()
+            event.accepted = true
+        }
+        // Phím Esc để focus ra ngoài root
+        else if (event.key === Qt.Key_Escape) {
+            root.forceActiveFocus()
+            event.accepted = true
+        }
+    }
+    
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Space && !event.isAutoRepeat) {
+            // Chỉ kích hoạt khi đang ở chế độ thủ công (manual mode) và không đang nhập văn bản
+            if (displayModel && !displayModel.autoMode && !textInput.activeFocus) {
+                // Đảm bảo root có focus để nhận phím
+                root.forceActiveFocus()
+                
+                manualBtn.text = "NHẤN VÀ GIỮ ĐỂ NÓI"
+                root.manualButtonReleased()
+                event.accepted = true
+            }
+        }
+    }
 
     // 主布局
     ColumnLayout {
@@ -375,7 +421,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
-                    onClicked: root.autoButtonClicked()
+                    onClicked: { root.autoButtonClicked(); root.forceActiveFocus() }
                     
                     // Glow effect
                     layer.enabled: true
@@ -412,7 +458,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
-                    onClicked: root.abortButtonClicked()
+                    onClicked: { root.abortButtonClicked(); root.forceActiveFocus() }
                     
                     // Red glow effect
                     layer.enabled: true
@@ -473,7 +519,7 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-                        onClicked: { if (textInput.text.trim().length > 0) { root.sendButtonClicked(textInput.text); textInput.text = "" } }
+                        onClicked: { if (textInput.text.trim().length > 0) { root.sendButtonClicked(textInput.text); textInput.text = ""; root.forceActiveFocus() } }
                     }
                 }
 
@@ -501,7 +547,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
-                    onClicked: root.modeButtonClicked()
+                    onClicked: { root.modeButtonClicked(); root.forceActiveFocus() }
                     
                     // Subtle glow effect
                     layer.enabled: true
@@ -537,7 +583,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
                     }
-                    onClicked: root.settingsButtonClicked()
+                    onClicked: { root.settingsButtonClicked(); root.forceActiveFocus() }
                     
                     // Subtle glow effect
                     layer.enabled: true
