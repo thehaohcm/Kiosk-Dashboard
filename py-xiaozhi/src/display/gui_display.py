@@ -330,7 +330,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         """
         完成启动流程.
         """
-        await self.update_emotion("neutral")
+        await self.update_emotion("happy")  # Sử dụng emotion vẽ bằng code
 
         # 根据配置决定显示模式
         if getattr(self, "_is_fullscreen", False):
@@ -494,20 +494,32 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
     def _get_emotion_asset_path(self, emotion_name: str) -> str:
         """
         获取表情资源文件路径，自动匹配常见后缀.
+        Ưu tiên sử dụng keyword emotion (happy, sad, thinking, surprised) thay vì file.
         """
+        # Danh sách các emotion keywords được vẽ bằng code
+        code_emotions = ["happy", "sad", "thinking", "surprised", "neutral", 
+                        "angry", "confused", "love", "wink", "winking",
+                        "crying", "embarrassed", "funny", "laughing", "relaxed", 
+                        "shocked", "silly", "sleepy", "cool", "confident", 
+                        "delicious", "kissy", "loving"]
+        
+        # Nếu là keyword emotion, trả về trực tiếp
+        if emotion_name in code_emotions:
+            return emotion_name
+        
+        # Kiểm tra cache
         if emotion_name in self._emotion_cache:
             return self._emotion_cache[emotion_name]
 
         assets_dir = find_assets_dir()
         if not assets_dir:
-            path = "😊"
+            path = "happy"  # Mặc định dùng emotion vẽ code
         else:
             emotion_dir = assets_dir / "emojis"
             # 尝试查找表情文件，失败则回退到 neutral
             path = (
                 str(self._find_emotion_file(emotion_dir, emotion_name))
-                or str(self._find_emotion_file(emotion_dir, "neutral"))
-                or "😊"
+                or "happy"  # Fallback về emotion vẽ code thay vì emoji
             )
 
         self._emotion_cache[emotion_name] = path
