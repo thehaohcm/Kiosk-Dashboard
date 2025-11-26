@@ -351,10 +351,14 @@ Rectangle {
                                         // Vẽ theo emotion
                                         if (emotion === "neutral") {
                                             // 😐 NEUTRAL - Mắt bình thường, miệng thẳng
-                                            // Mắt trái
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            // Mắt phải
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // Mắt trái (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng thẳng (không cảm xúc)
                                             ctx.beginPath()
@@ -363,12 +367,17 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "happy" || emotion === "" || !emotion) {
-                                            // 😊 HAPPY - Mắt chữ nhật bo góc, miệng cong cười
-                                            // Mắt trái
+                                            // 😊 HAPPY - Mắt tròn, miệng cong cười - Màu xanh cyan
+                                            ctx.strokeStyle = "#00d4ff"
                                             ctx.fillStyle = "#00d4ff"
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            // Mắt phải
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // Mắt trái (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng cười (đường cong)
                                             ctx.beginPath()
@@ -376,19 +385,25 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "sad") {
-                                            // 😢 SAD - Mắt chữ nhật nghiêng, miệng cong xuống
+                                            // 😢 SAD - Mắt tròn lệch, miệng cong xuống - Màu xanh buồn
+                                            ctx.strokeStyle = "#6c9bd1"
+                                            ctx.fillStyle = "#6c9bd1"
+                                            // Mắt trái (tròn, oval hơi nghiêng)
                                             ctx.save()
-                                            // Mắt trái nghiêng
                                             ctx.translate(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2)
                                             ctx.rotate(-0.2)
-                                            ctx.fillRect(-eyeWidth/2, -eyeHeight/2, eyeWidth, eyeHeight)
+                                            ctx.beginPath()
+                                            ctx.ellipse(0, 0, eyeWidth*0.4, eyeHeight*0.6, 0, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             ctx.restore()
                                             
+                                            // Mắt phải (tròn, oval hơi nghiêng)
                                             ctx.save()
-                                            // Mắt phải nghiêng
                                             ctx.translate(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2)
                                             ctx.rotate(0.2)
-                                            ctx.fillRect(-eyeWidth/2, -eyeHeight/2, eyeWidth, eyeHeight)
+                                            ctx.beginPath()
+                                            ctx.ellipse(0, 0, eyeWidth*0.4, eyeHeight*0.6, 0, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             ctx.restore()
                                             
                                             // Miệng buồn
@@ -397,11 +412,17 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "thinking") {
-                                            // 🤔 THINKING - Mắt nhỏ, miệng nhỏ ngang
-                                            // Mắt trái (nhỏ hơn)
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth*0.8, eyeY + eyeHeight*0.2, eyeWidth*0.8, eyeHeight*0.8)
-                                            // Mắt phải (nhỏ hơn)
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY + eyeHeight*0.2, eyeWidth*0.8, eyeHeight*0.8)
+                                            // 🤔 THINKING - Mắt nhỏ tròn, miệng nhỏ ngang - Màu tím suy nghĩ
+                                            ctx.strokeStyle = "#b197fc"
+                                            ctx.fillStyle = "#b197fc"
+                                            // Mắt trái (tròn nhỏ hơn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth*0.4, eyeY + eyeHeight*0.6, eyeWidth*0.35, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn nhỏ hơn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth*0.4, eyeY + eyeHeight*0.6, eyeWidth*0.35, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng ngang ngắn
                                             ctx.beginPath()
@@ -414,7 +435,9 @@ Rectangle {
                                             ctx.fillText("...", centerX + w*0.25, centerY - h*0.15)
                                             
                                         } else if (emotion === "surprised") {
-                                            // 😮 SURPRISED - Mắt to, miệng hình chữ O
+                                            // 😮 SURPRISED - Mắt to, miệng hình chữ O - Màu cam ngạc nhiên
+                                            ctx.strokeStyle = "#ffa94d"
+                                            ctx.fillStyle = "#ffa94d"
                                             // Mắt trái (to hơn, chỉ viền)
                                             ctx.strokeRect(centerX - eyeSpacing - eyeWidth*1.2, eyeY - eyeHeight*0.2, eyeWidth*1.2, eyeHeight*1.4)
                                             // Mắt phải (to hơn, chỉ viền)
@@ -426,7 +449,18 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "angry") {
-                                            // 😠 ANGRY - Mắt nghiêng xuống trong, miệng zigzag
+                                            // 😠 ANGRY - Mắt nghiêng xuống trong, miệng zigzag, viền đỏ
+                                            
+                                            // Vẽ viền đỏ nhấp nháy xung quanh
+                                            ctx.strokeStyle = "#ff4757"
+                                            ctx.lineWidth = 6
+                                            ctx.beginPath()
+                                            ctx.arc(centerX, centerY, Math.min(w, h) * 0.48, 0, 2 * Math.PI)
+                                            ctx.stroke()
+                                            
+                                            // Reset màu về cyan cho phần còn lại
+                                            ctx.strokeStyle = "#00d4ff"
+                                            ctx.fillStyle = "#00d4ff"
                                             ctx.lineWidth = 5
                                             
                                             // "Lông mày" giận - đường nghiêng
@@ -441,10 +475,14 @@ Rectangle {
                                             ctx.stroke()
                                             
                                             ctx.lineWidth = 4
-                                            // Mắt trái
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            // Mắt phải
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // Mắt trái (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng zigzag
                                             ctx.beginPath()
@@ -456,11 +494,17 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "confused") {
-                                            // 😕 CONFUSED - Mắt lệch độ cao, miệng nghiêng
-                                            // Mắt trái
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            // Mắt phải (cao hơn)
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY - eyeHeight*0.5, eyeWidth, eyeHeight)
+                                            // 😕 CONFUSED - Mắt lệch độ cao, miệng nghiêng - Màu xám bối rối
+                                            ctx.strokeStyle = "#adb5bd"
+                                            ctx.fillStyle = "#adb5bd"
+                                            // Mắt trái (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn, cao hơn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY - eyeHeight*0.5 + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng nghiêng
                                             ctx.beginPath()
@@ -473,7 +517,9 @@ Rectangle {
                                             ctx.fillText("?", centerX + w*0.28, centerY - h*0.18)
                                             
                                         } else if (emotion === "love") {
-                                            // 😍 LOVE - Mắt hình trái tim
+                                            // 😍 LOVE - Mắt hình trái tim - Màu hồng yêu thương
+                                            ctx.strokeStyle = "#ff6b9d"
+                                            ctx.fillStyle = "#ff6b9d"
                                             // Vẽ trái tim trái
                                             var heartX = centerX - eyeSpacing - eyeWidth/2
                                             var heartY = eyeY + eyeHeight/2
@@ -499,15 +545,17 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "wink" || emotion === "winking") {
-                                            // 😉 WINK - Một mắt nhắm (đường ngang), một mắt mở
+                                            // 😉 WINK - Một mắt nhắm (đường ngang), một mắt mở tròn
                                             // Mắt trái nhắm
                                             ctx.beginPath()
                                             ctx.moveTo(centerX - eyeSpacing - eyeWidth, eyeY + eyeHeight/2)
                                             ctx.lineTo(centerX - eyeSpacing, eyeY + eyeHeight/2)
                                             ctx.stroke()
                                             
-                                            // Mắt phải mở
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // Mắt phải mở (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // Miệng cười
                                             ctx.beginPath()
@@ -515,7 +563,9 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "crying") {
-                                            // 😭 CRYING - Mắt nhắm, nước mắt chảy, miệng khóc
+                                            // 😭 CRYING - Mắt nhắm, nước mắt chảy, miệng khóc - Màu xanh nước mắt
+                                            ctx.strokeStyle = "#339af0"
+                                            ctx.fillStyle = "#339af0"
                                             // Mắt nhắm (đường cong)
                                             ctx.beginPath()
                                             ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.6, 0, Math.PI)
@@ -538,10 +588,16 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "embarrassed") {
-                                            // 😳 EMBARRASSED - Mắt nhìn sang, má đỏ, miệng nhỏ
-                                            // Mắt nhìn sang (chữ nhật nhỏ bên cạnh)
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth*0.5, eyeY, eyeWidth*0.6, eyeHeight*0.8)
-                                            ctx.fillRect(centerX + eyeSpacing + eyeWidth*0.4, eyeY, eyeWidth*0.6, eyeHeight*0.8)
+                                            // 😳 EMBARRASSED - Mắt tròn nhìn sang, má đỏ, miệng nhỏ - Màu hồng xấu hổ
+                                            ctx.strokeStyle = "#faa2c1"
+                                            ctx.fillStyle = "#faa2c1"
+                                            // Mắt nhìn sang (tròn nhỏ lệch)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth*0.2, eyeY + eyeHeight*0.4, eyeWidth*0.3, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth*0.7, eyeY + eyeHeight*0.4, eyeWidth*0.3, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             // "Má đỏ" (dấu gạch)
                                             ctx.lineWidth = 2
@@ -563,7 +619,9 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "funny" || emotion === "laughing") {
-                                            // 🤣 FUNNY/LAUGHING - Mắt nhắm cười, miệng há to
+                                            // 🤣 FUNNY/LAUGHING - Mắt nhắm cười, miệng há to - Màu vàng cam vui nhộn
+                                            ctx.strokeStyle = "#ff922b"
+                                            ctx.fillStyle = "#ff922b"
                                             // Mắt nhắm cười (dấu ^)
                                             ctx.beginPath()
                                             ctx.moveTo(centerX - eyeSpacing - eyeWidth, eyeY + eyeHeight/2)
@@ -585,7 +643,9 @@ Rectangle {
                                             ctx.lineWidth = 4
                                             
                                         } else if (emotion === "relaxed") {
-                                            // 😌 RELAXED - Mắt nhắm nhẹ, miệng cười nhẹ
+                                            // 😌 RELAXED - Mắt nhắm nhẹ, miệng cười nhẹ - Màu xanh lá thư giãn
+                                            ctx.strokeStyle = "#74c69d"
+                                            ctx.fillStyle = "#74c69d"
                                             // Mắt nhắm (đường ngang nhẹ cong)
                                             ctx.beginPath()
                                             ctx.moveTo(centerX - eyeSpacing - eyeWidth, eyeY + eyeHeight/2)
@@ -602,7 +662,9 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "shocked") {
-                                            // 😱 SHOCKED - Mắt to tròn, miệng há hốc
+                                            // 😱 SHOCKED - Mắt to tròn, miệng há hốc - Màu tím sốc
+                                            ctx.strokeStyle = "#da77f2"
+                                            ctx.fillStyle = "#da77f2"
                                             // Mắt to (hình tròn to)
                                             ctx.beginPath()
                                             ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.8, 0, 2 * Math.PI)
@@ -617,10 +679,17 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "silly") {
-                                            // 🤪 SILLY - Mắt lệch, lưỡi lè
-                                            // Mắt lệch
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth*0.7, eyeY - eyeHeight*0.3, eyeWidth*0.8, eyeHeight*0.8)
-                                            ctx.strokeRect(centerX + eyeSpacing, eyeY + eyeHeight*0.2, eyeWidth*1.2, eyeHeight*1.2)
+                                            // 🤪 SILLY - Mắt tròn lệch kích thước, lưỡi lè - Màu vàng chanh ngộ nghĩnh
+                                            ctx.strokeStyle = "#ffe066"
+                                            ctx.fillStyle = "#ffe066"
+                                            // Mắt trái (tròn nhỏ, cao hơn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth*0.3, eyeY + eyeHeight*0.1, eyeWidth*0.4, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            // Mắt phải (tròn to hơn, thấp hơn, chỉ viền)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight*0.8, eyeWidth*0.6, 0, 2 * Math.PI)
+                                            ctx.stroke()
                                             
                                             // Miệng nghiêng với lưỡi
                                             ctx.beginPath()
@@ -635,7 +704,9 @@ Rectangle {
                                             ctx.fill()
                                             
                                         } else if (emotion === "sleepy") {
-                                            // 😴 SLEEPY - Mắt nhắm cong xuống như ngủ, "Zzz" phía trên
+                                            // 😴 SLEEPY - Mắt nhắm cong xuống như ngủ, "Zzz" phía trên - Màu xanh dương buồn ngủ
+                                            ctx.strokeStyle = "#4dabf7"
+                                            ctx.fillStyle = "#4dabf7"
                                             // Mắt nhắm cong (như đang ngủ)
                                             ctx.beginPath()
                                             ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.6, 0, Math.PI)
@@ -659,11 +730,16 @@ Rectangle {
                                             ctx.fillText("z", centerX + w*0.36, eyeY - h*0.17)
                                             
                                         } else if (emotion === "cool" || emotion === "confident") {
-                                            // 😎 COOL/CONFIDENT - Kính đen, miệng mỉm cười
-                                            // Kính đen (chữ nhật đen to)
-                                            ctx.fillStyle = "#00d4ff"
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth*1.3, eyeY - eyeHeight*0.2, eyeWidth*1.3, eyeHeight*1.3)
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY - eyeHeight*0.2, eyeWidth*1.3, eyeHeight*1.3)
+                                            // 😎 COOL/CONFIDENT - Kính tròn đen, miệng mỉm cười - Màu xanh ngọc tự tin
+                                            ctx.strokeStyle = "#20c997"
+                                            ctx.fillStyle = "#20c997"
+                                            // Kính đen (hình bo tròn)
+                                            ctx.beginPath()
+                                            ctx.roundRect(centerX - eyeSpacing - eyeWidth*1.3, eyeY - eyeHeight*0.2, eyeWidth*1.3, eyeHeight*1.3, eyeWidth*0.3)
+                                            ctx.fill()
+                                            ctx.beginPath()
+                                            ctx.roundRect(centerX + eyeSpacing, eyeY - eyeHeight*0.2, eyeWidth*1.3, eyeHeight*1.3, eyeWidth*0.3)
+                                            ctx.fill()
                                             
                                             // Cầu nối kính
                                             ctx.fillRect(centerX - eyeWidth*0.15, eyeY + eyeHeight*0.2, eyeWidth*0.3, eyeHeight*0.3)
@@ -675,10 +751,16 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else if (emotion === "delicious" || emotion === "kissy") {
-                                            // 😋 DELICIOUS/KISSY - Mắt vui, lưỡi liếm môi / môi chu
-                                            // Mắt
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // 😋 DELICIOUS/KISSY - Mắt tròn vui, lưỡi liếm môi / môi chu - Màu cam đỏ ngon miệng
+                                            ctx.strokeStyle = "#ff8787"
+                                            ctx.fillStyle = "#ff8787"
+                                            // Mắt (tròn)
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             
                                             if (emotion === "delicious") {
                                                 // Lưỡi liếm môi
@@ -730,9 +812,13 @@ Rectangle {
                                             ctx.stroke()
                                             
                                         } else {
-                                            // Mặc định - happy
-                                            ctx.fillRect(centerX - eyeSpacing - eyeWidth, eyeY, eyeWidth, eyeHeight)
-                                            ctx.fillRect(centerX + eyeSpacing, eyeY, eyeWidth, eyeHeight)
+                                            // Mặc định - happy với mắt tròn
+                                            ctx.beginPath()
+                                            ctx.arc(centerX - eyeSpacing - eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
+                                            ctx.beginPath()
+                                            ctx.arc(centerX + eyeSpacing + eyeWidth/2, eyeY + eyeHeight/2, eyeWidth*0.5, 0, 2 * Math.PI)
+                                            ctx.fill()
                                             ctx.beginPath()
                                             ctx.arc(centerX, mouthY - mouthHeight, mouthWidth/2, 0.3 * Math.PI, 0.7 * Math.PI)
                                             ctx.stroke()
