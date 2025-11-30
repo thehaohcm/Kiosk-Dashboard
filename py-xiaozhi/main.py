@@ -122,10 +122,20 @@ if __name__ == "__main__":
             # 在GUI模式下，由main统一创建 QApplication 与 qasync 事件循环
             try:
                 import qasync
+                from PyQt5.QtCore import Qt
                 from PyQt5.QtWidgets import QApplication
             except ImportError as e:
                 logger.error(f"GUI模式需要qasync和PyQt5库: {e}")
                 sys.exit(1)
+
+            # Bật high DPI scaling và cải thiện font rendering
+            QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+            QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+            
+            # Tối ưu font rendering
+            os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+            
+            logger.info("Đã bật High DPI scaling cho Qt application")
 
             qt_app = QApplication.instance() or QApplication(sys.argv)
 

@@ -6,6 +6,13 @@
 .venv/
 venv/
 py-xiaozhi/.venv
+py-xiaozhi/py-xiaozhi/
+py-xiaozhi/bin/
+py-xiaozhi/lib/
+py-xiaozhi/lib64
+py-xiaozhi/include/
+py-xiaozhi/share/
+py-xiaozhi/pyvenv.cfg
 
 # Project specific
 py-xiaozhi/logs/

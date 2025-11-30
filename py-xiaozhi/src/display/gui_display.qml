@@ -151,8 +151,10 @@ Rectangle {
                     Text {
                         anchors.centerIn: parent;
                         text: "–";
-                        font.pixelSize: 14;
+                        font.pixelSize: 16;
                         color: btnMinMouse.containsMouse ? "#00d4ff" : "#8b9dc3"
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     MouseArea {
                         id: btnMinMouse
@@ -173,8 +175,10 @@ Rectangle {
                     Text {
                         anchors.centerIn: parent;
                         text: "×";
-                        font.pixelSize: 14;
+                        font.pixelSize: 16;
                         color: btnCloseMouse.containsMouse ? "#ff4757" : "#8b9dc3"
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     MouseArea {
                         id: btnCloseMouse
@@ -211,9 +215,11 @@ Rectangle {
                         anchors.centerIn: parent
                         text: displayModel ? displayModel.statusText : "Trạng thái: Chưa kết nối"
                         font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 14
+                        font.pixelSize: 15
                         font.weight: Font.Bold
                         color: "#00d4ff"
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     
                     // Holographic glow effect
@@ -865,8 +871,10 @@ Rectangle {
                             width: textFlickable.width - 10
                             text: displayModel ? (displayModel.conversationHistory || displayModel.ttsText || "SẴN SÀNG") : "SẴN SÀNG"
                             font.family: "Consolas, Monaco, monospace"
-                            font.pixelSize: 13
+                            font.pixelSize: 14
                             color: "#00d4ff"
+                            renderType: Text.NativeRendering
+                            antialiasing: true
                             wrapMode: Text.WordWrap
                             textFormat: Text.PlainText
                             leftPadding: 5
@@ -952,13 +960,15 @@ Rectangle {
 
                     contentItem: Text {
                         text: manualBtn.text
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 11
+                        font.family: "DejaVu Sans, sans-serif"
+                        font.pixelSize: 12
                         font.weight: Font.Bold
                         color: "black"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
 
                     onPressed: { manualBtn.text = "THẢ ĐỂ DỪNG"; root.manualButtonPressed() }
@@ -994,13 +1004,15 @@ Rectangle {
 
                     contentItem: Text {
                         text: autoBtn.text
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 11
+                        font.family: "DejaVu Sans, sans-serif"
+                        font.pixelSize: 12
                         font.weight: Font.Bold
                         color: "black"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     onClicked: { root.autoButtonClicked(); root.forceActiveFocus() }
                     
@@ -1031,13 +1043,15 @@ Rectangle {
                     }
                     contentItem: Text {
                         text: abortBtn.text
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 11
+                        font.family: "DejaVu Sans, sans-serif"
+                        font.pixelSize: 12
                         font.weight: Font.Bold
                         color: "#ff4757"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     onClicked: { root.abortButtonClicked(); root.forceActiveFocus() }
                     
@@ -1072,11 +1086,14 @@ Rectangle {
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             verticalAlignment: TextInput.AlignVCenter
-                            font.family: "PingFang SC, Microsoft YaHei UI"
-                            font.pixelSize: 12
+                            font.family: "DejaVu Sans, sans-serif"
+                            font.pixelSize: 13
                             color: "#333333"
                             selectByMouse: true
                             clip: true
+                            renderType: Text.NativeRendering
+                            antialiasing: true
+                            maximumLength: 500
 
                             // 占位符
                             Text { anchors.fill: parent; text: "Nhập văn bản..."; font: textInput.font; color: "#c9cdd4"; verticalAlignment: Text.AlignVCenter; visible: !textInput.text && !textInput.activeFocus }
@@ -1094,11 +1111,14 @@ Rectangle {
                         background: Rectangle { color: sendBtn.pressed ? "#0e42d2" : (sendBtn.hovered ? "#4080ff" : "#165dff"); radius: 8 }
                         contentItem: Text {
                             text: sendBtn.text
-                            font.family: "PingFang SC, Microsoft YaHei UI"
-                            font.pixelSize: 12
+                            font.family: "DejaVu Sans, sans-serif"
+                            font.pixelSize: 13
+                            font.weight: Font.Bold
                             color: "white"
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
+                            renderType: Text.NativeRendering
+                            antialiasing: true
                         }
                         onClicked: { if (textInput.text.trim().length > 0) { root.sendButtonClicked(textInput.text); textInput.text = ""; root.forceActiveFocus() } }
                     }
@@ -1120,13 +1140,15 @@ Rectangle {
                     }
                     contentItem: Text {
                         text: modeBtn.text
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 10
+                        font.family: "DejaVu Sans, sans-serif"
+                        font.pixelSize: 11
                         font.weight: Font.Bold
                         color: modeBtn.hovered ? "#00d4ff" : "#8b9dc3"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     onClicked: { root.modeButtonClicked(); root.forceActiveFocus() }
                     
@@ -1156,13 +1178,15 @@ Rectangle {
                     }
                     contentItem: Text {
                         text: settingsBtn.text
-                        font.family: "Consolas, Monaco, monospace"
-                        font.pixelSize: 11
+                        font.family: "DejaVu Sans, sans-serif"
+                        font.pixelSize: 12
                         font.weight: Font.Bold
                         color: settingsBtn.hovered ? "#00d4ff" : "#8b9dc3"
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight
+                        renderType: Text.NativeRendering
+                        antialiasing: true
                     }
                     onClicked: { root.settingsButtonClicked(); root.forceActiveFocus() }
                     

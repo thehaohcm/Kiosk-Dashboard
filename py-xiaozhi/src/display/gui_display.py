@@ -220,7 +220,11 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
             raise RuntimeError("QApplication 未找到，请确保在 qasync 环境中运行")
 
         self.app.setQuitOnLastWindowClosed(False)
-        self.app.setFont(QFont("PingFang SC", self.DEFAULT_FONT_SIZE))
+        
+        # Thiết lập font với anti-aliasing tốt hơn
+        font = QFont("Sans Serif", self.DEFAULT_FONT_SIZE)
+        font.setStyleStrategy(QFont.PreferAntialias)
+        self.app.setFont(font)
 
         self._setup_signal_handlers()
         self._setup_activation_handler()
@@ -427,10 +431,18 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         处理发送文本按钮点击.
         """
         text = text.strip()
-        if not text or not self._callbacks["send_text"]:
+        self.logger.info(f"Nhận được text từ textbox: '{text[:50]}...' (độ dài: {len(text)})")
+        
+        if not text:
+            self.logger.warning("Text rỗng, bỏ qua")
+            return
+            
+        if not self._callbacks["send_text"]:
+            self.logger.error("Không có callback send_text, không thể gửi")
             return
 
         try:
+            self.logger.info(f"Đang tạo task gửi text...")
             task = asyncio.create_task(self._callbacks["send_text"](text))
             task.add_done_callback(
                 lambda t: t.cancelled()
@@ -439,6 +451,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
                     f"发送文本任务异常: {t.exception()}", exc_info=True
                 )
             )
+            self.logger.info(f"Task gửi text đã được tạo thành công")
         except Exception as e:
             self.logger.error(f"发送文本时出错: {e}")
 
